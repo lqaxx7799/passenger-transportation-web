@@ -1,0 +1,7 @@
+export const constants = {
+  COACH_LOADING: 'COACH_LOADING',
+  COACH_LOADED: 'COACH_LOADED',
+
+  ASYNC_START: 'ASYNC_START',
+  ASYNC_END: 'ASYNC_END',
+};
