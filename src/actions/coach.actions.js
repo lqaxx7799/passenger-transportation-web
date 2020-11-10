@@ -21,6 +21,22 @@ const loadAllCoaches = () => {
   }
 }
 
+const addNewCoach = (coach) => {
+  return (dispatch, getState) => {
+    const state = getState();
+    return coachServices.addNewCoach(coach).then(result => {
+      dispatch({
+        type: constants.COACH_LOADED,
+        payload: [
+          ...state.coachReducer.coaches,
+          result,
+        ],
+      });
+    });
+  }
+}
+
 export default {
   loadAllCoaches,
+  addNewCoach,
 };
