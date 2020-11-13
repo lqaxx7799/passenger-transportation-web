@@ -1,19 +1,29 @@
+import { base } from './base.services';
+
 const loadAllCoaches = () => {
-  return fetch('http://localhost:8080/coach').then(response => response.json());
+  return base.requests.get('/coach');
+}
+
+const getCoachById = (id) => {
+  return base.requests.get(`/coach/${id}`);
 }
 
 const addNewCoach = (coach) => {
-  return fetch('http://localhost:8080/coach', {
-    method: 'POST',
-    body: JSON.stringify(coach),
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  })
-    .then(response => response.json());
+  return base.requests.post('/coach', coach);
+}
+
+const updateCoach = (coach) => {
+  return base.requests.put(`/coach/${coach.id}`, coach);
+}
+
+const deleteCoach = (id) => {
+  return base.requests.del(`/coach/${id}`);
 }
 
 export default {
   loadAllCoaches,
+  getCoachById,
   addNewCoach,
+  updateCoach,
+  deleteCoach,
 }

@@ -3,6 +3,7 @@ import { constants } from '../helpers/constants';
 const defaultState = {
   loading: false,
   coaches: [],
+  editingCoach: {},
 };
 
 const coachReducer = (state = defaultState, action) => {
@@ -18,6 +19,17 @@ const coachReducer = (state = defaultState, action) => {
         coaches: action.payload,
         loading: false,
       };
+    case constants.COACH_EDITING_LOADED:
+      return {
+        ...state,
+        editingCoach: action.payload,
+        loading: false,
+      }
+    case constants.COACH_EDITING_CHANGED:
+      return {
+        ...state,
+        editingCoach: action.payload,
+      }
     default:
       return state;
   }

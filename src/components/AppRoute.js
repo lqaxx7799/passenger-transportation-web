@@ -1,18 +1,20 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router';
+import { base } from '../services/base.services';
+import authenticationServices from '../services/authentication.services';
 import MainLayout from './MainLayout';
 
 const AppRoute = ({
   component: Component,
   layout: Layout = MainLayout,
-  auth: auth = true,
+  needAuth: needAuth = true,
   ...rest
 }) => {
   return (
     <Route
       {...rest}
       render={(props) => (
-        auth
+        !needAuth || authenticationServices.isAuthenticated()
           ? <Layout><Component {...props} /></Layout>
           : <Redirect to='/login' />
       )}

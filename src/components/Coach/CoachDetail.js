@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Breadcrumb,
   BreadcrumbItem,
   Button,
   DataTable,
-  ModalWrapper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from 'carbon-components-react';
 import View20 from '@carbon/icons-react/lib/view/20';
 import Edit20 from '@carbon/icons-react/lib/edit/20';
@@ -21,12 +20,10 @@ import Delete20 from '@carbon/icons-react/lib/delete/20';
 
 import coachActions from '../../actions/coach.actions';
 import { COACH_DATA_TABLE_CONFIG } from '../../helpers/constants';
-import commonActions from '../../actions/common.actions';
 
-const CoachList = (props) => {
+const CoachDetail = (props) => {
   const coachState = useSelector(state => state.coachReducer);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   useEffect(() => {
     dispatch(coachActions.loadAllCoaches());
@@ -36,21 +33,14 @@ const CoachList = (props) => {
 
   const showCoachDetail = (id) => {
     console.log('show detail' + id);
-    history.push(`/coach/${id}`);
   }
 
   const editCoach = (id) => {
     console.log('edit' + id);
-    history.push(`/coach/${id}/edit`);
   }
 
   const deleteCoach = (id) => {
     console.log('delete' + id);
-    dispatch(coachActions.deleteCoach(id))
-      .catch(error => {
-        console.log(1111111, error)
-        alert("Error");
-      })
   }
 
   const renderList = () => {
@@ -98,20 +88,16 @@ const CoachList = (props) => {
                               kind="secondary"
                               onClick={() => editCoach(row.id)}
                             />
-                            <ModalWrapper
-                              buttonTriggerClassName="bx--btn--sm bx--btn--icon-only"
-                              renderTriggerButtonIcon={Delete20}
-                              triggerButtonKind="danger"
-                              triggerButtonIconDescription="Delete coach"
-                              size="xs"
-                              primaryButtonText="Delete"
-                              modalHeading="Delete this coach?"
-                              modalLabel="Confirming"
-                              danger
-                              handleSubmit={() => deleteCoach(row.id)}
-                            >
-                              <p>Are you sure to delete this coach?</p>
-                            </ModalWrapper>
+                            <Button
+                              hasIconOnly
+                              renderIcon={Delete20}
+                              tooltipAlignment="center"
+                              tooltipPosition="bottom"
+                              iconDescription="Delete coach"
+                              kind="danger"
+                              size="small"
+                              onClick={() => deleteCoach(row.id)}
+                            />
                           </TableCell>
                         )
                     ))}
@@ -130,7 +116,7 @@ const CoachList = (props) => {
         <div className="bx--col-lg-16">
           <Breadcrumb noTrailingSlash>
             <BreadcrumbItem>
-              <Link to="/">Home</Link>
+            <Link to="/">Home</Link>
             </BreadcrumbItem>
           </Breadcrumb>
           <h1 className="landing-page__heading">
@@ -152,4 +138,4 @@ const CoachList = (props) => {
   );
 }
 
-export default CoachList;
+export default CoachDetail;

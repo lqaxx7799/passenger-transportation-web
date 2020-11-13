@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Search20 from "@carbon/icons-react/lib/search/20";
 import Notification20 from "@carbon/icons-react/lib/notification/20";
 import AppSwitcher20 from "@carbon/icons-react/lib/app-switcher/20";
@@ -9,37 +10,53 @@ import {
   HeaderGlobalBar,
   HeaderNavigation,
   HeaderMenu,
-  HeaderMenuItem
+  HeaderMenuItem,
+  HeaderMenuButton
 } from 'carbon-components-react/lib/components/UIShell';
-import { Button } from 'carbon-components-react';
+
+import authenticationServices from '../services/authentication.services';
 
 const MainLayout = (props) => {
+  const isAuthenticated = authenticationServices.isAuthenticated();
   return (
     <div>
       <Header>
-        <HeaderName href="./" prefix=''>
+        <HeaderName element={Link} to="/" prefix=''>
           Passenger Transportation
         </HeaderName>
         <HeaderNavigation>
-          <HeaderMenuItem href="./coaches">Coach</HeaderMenuItem>
-          <HeaderMenuItem href="./employees">Employee</HeaderMenuItem>
-          <HeaderMenuItem href="./routes">Route</HeaderMenuItem>
-          <HeaderMenu aria-label="Report" menuLinkName="Report">
-            <HeaderMenuItem href="#">By Coaches</HeaderMenuItem>
-            <HeaderMenuItem href="#">By ...</HeaderMenuItem>
-            <HeaderMenuItem href="#">By ...</HeaderMenuItem>
-          </HeaderMenu>
+          {isAuthenticated ? (
+            <>
+              <HeaderMenuItem element={Link} to="/coaches">Coach</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/employees">Employee</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/routes">Route</HeaderMenuItem>
+              <HeaderMenu aria-label="Report" menuLinkName="Report">
+                <HeaderMenuItem href="#">By Coaches</HeaderMenuItem>
+                <HeaderMenuItem href="#">By ...</HeaderMenuItem>
+                <HeaderMenuItem href="#">By ...</HeaderMenuItem>
+              </HeaderMenu>
+            </>
+          ) : (
+            <>
+              <HeaderMenuItem element={Link} to="/login">Log In</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/register">Register</HeaderMenuItem>
+            </>
+          )}
         </HeaderNavigation>
         <HeaderGlobalBar>
-          <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
-            <Search20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction aria-label="Notifications" onClick={() => {}}>
-            <Notification20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction aria-label="App Switcher" onClick={() => {}}>
-            <AppSwitcher20 />
-          </HeaderGlobalAction>
+          {isAuthenticated && (
+            <>
+              <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
+                <Search20 />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction aria-label="Notifications" onClick={() => {}}>
+                <Notification20 />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction aria-label="App Switcher" onClick={() => {}}>
+                <AppSwitcher20 />
+              </HeaderGlobalAction>
+            </>
+          )}
         </HeaderGlobalBar>
       </Header>
       <div className='pt-main-body'>
