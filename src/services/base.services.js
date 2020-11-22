@@ -38,26 +38,26 @@ export const base = {
         headers: getBaseHeader(),
         data: JSON.stringify(body),
       })
-      .then(response => response.json()),
+      .then(response => response.data),
     put: (url, body) =>
       axios(`${API_ROOT}${url}`, {
         method: 'PUT',
         headers: getBaseHeader(),
         body: JSON.stringify(body),
       })
-      .then(response => response.json()),
+      .then(response => response.data),
     patch: (url, body) =>
       axios(`${API_ROOT}${url}`, {
         method: 'PATCH',
         headers: getBaseHeader(),
         body: JSON.stringify(body),
       })
-      .then(response => response.json()),
+      .then(response => response.data),
     del: (url) =>
       axios(`${API_ROOT}${url}`, {
         method: 'DELETE',
         headers: getBaseHeader(),
       })
-      .then(response => response.json()),
+      .then(response => response.data),
   }
 }

@@ -44,7 +44,7 @@ export const DEFAULT_EMPLOYEE = {
   identificationNumber: '',
   licenseCode: '',
   licenseType: '',
-  senority: '',
+  seniority: '',
 };
 
 export const DEFAULT_ROUTE = {
@@ -108,4 +108,78 @@ export const COACH_DATA_TABLE_CONFIG = [
     key: 'action',
     name: 'Action'
   }
+];
+
+export const ROUTE_DATA_TABLE_CONFIG = [
+  {
+    key: 'id',
+    name: 'Id'
+  },
+  {
+    key: 'startingPoint',
+    name: 'Starting point'
+  },
+  {
+    key: 'destinationPoint',
+    name: 'Destination Point'
+  },
+  {
+    key: 'distance',
+    name: 'Distance'
+  },
+  {
+    key: 'routeComplexity',
+    name: 'Route Complexity'
+  },
+  {
+    key: 'estimatedHours',
+    name: 'Estimated Hours'
+  },
+  {
+    key: 'action',
+    name: 'Action'
+  },
+];
+
+export const EMPLOYEE_DATA_TABLE_CONFIG = [
+  {
+    key: 'id',
+    name: 'Id'
+  },
+  {
+    key: 'employeeName',
+    name: 'Employee Name'
+  },
+  {
+    key: 'address',
+    name: 'Address'
+  },
+  {
+    key: 'dateOfBirth',
+    name: 'Date of Birth'
+  },
+  {
+    key: 'gender',
+    name: 'Gender'
+  },
+  {
+    key: 'identificationNumber',
+    name: 'Identification Number'
+  },
+  {
+    key: 'licenseCode',
+    name: 'License Code'
+  },
+  {
+    key: 'licenseType',
+    name: 'License Type'
+  },
+  {
+    key: 'seniority',
+    name: 'Seniority'
+  },
+  {
+    key: 'action',
+    name: 'Action'
+  },
 ];

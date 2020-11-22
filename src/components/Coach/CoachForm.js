@@ -142,14 +142,17 @@ const CoachForm = (props) => {
                 />
               </div>
               <div style={{ marginBottom: '2rem' }} className="bx--col-lg-8">
-                <DatePicker dateFormat="Y-m-d" datePickerType="single">
+                <DatePicker
+                  dateFormat="Y-m-d"
+                  datePickerType="single"
+                  onSelect={(e) => onEditCoach('lastMaintainedDate', e.target.value)}
+                >
                   <DatePickerInput
                     id="date-picker-default-id"
                     placeholder="yyyy-mm-dd"
                     labelText="Last Maintained Date"
                     type="text"
                     value={editingCoach.lastMaintainedDate}
-                    onChange={(e) => onEditCoach('lastMaintainedDate', e.target.value)}
                   />
                 </DatePicker>
               </div>
