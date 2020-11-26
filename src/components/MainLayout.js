@@ -1,5 +1,7 @@
 import React from 'react';
+import _ from 'lodash';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Search20 from "@carbon/icons-react/lib/search/20";
 import Notification20 from "@carbon/icons-react/lib/notification/20";
 import AppSwitcher20 from "@carbon/icons-react/lib/app-switcher/20";
@@ -16,8 +18,10 @@ import {
 
 import authenticationServices from '../services/authentication.services';
 
+
 const MainLayout = (props) => {
-  const isAuthenticated = authenticationServices.isAuthenticated();
+  const authenticationState = useSelector(state => state.authenticationReducer);
+  const isAuthenticated = !_.isEmpty(authenticationState.currentAccount);
   return (
     <div>
       <Header>
@@ -30,6 +34,7 @@ const MainLayout = (props) => {
               <HeaderMenuItem element={Link} to="/coaches">Coach</HeaderMenuItem>
               <HeaderMenuItem element={Link} to="/employees">Employee</HeaderMenuItem>
               <HeaderMenuItem element={Link} to="/routes">Route</HeaderMenuItem>
+              <HeaderMenuItem element={Link} to="/trips">Trip</HeaderMenuItem>
               <HeaderMenu aria-label="Report" menuLinkName="Report">
                 <HeaderMenuItem href="#">By Coaches</HeaderMenuItem>
                 <HeaderMenuItem href="#">By ...</HeaderMenuItem>

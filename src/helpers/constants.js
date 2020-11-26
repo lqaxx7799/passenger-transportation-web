@@ -20,6 +20,7 @@ export const constants = {
   TRIP_EDITING_CHANGED: 'TRIP_EDITING_CHANGED',
 
   AUTHENTICATION_LOGGED_IN: 'AUTHENTICATION_LOGGED_IN',
+  AUTHENTICATION_LOGGED_OUT: 'AUTHENTICATION_LOGGED_OUT',
 
   ASYNC_START: 'ASYNC_START',
   ASYNC_END: 'ASYNC_END',
@@ -181,5 +182,48 @@ export const EMPLOYEE_DATA_TABLE_CONFIG = [
   {
     key: 'action',
     name: 'Action'
+  },
+];
+  
+export const TRIP_DATA_TABLE_CONFIG = [
+  {
+    key: 'id',
+    name: 'Id'
+  },
+  {
+    key: 'arrivalTime',
+    name: 'Arrival Time'
+  },
+  {
+    key: 'departureTime',
+    name: 'Departure Time'
+  },
+  {
+    key: 'ticketPrice',
+    name: 'Ticket Price'
+  },
+  {
+    key: 'numberOfPassengers',
+    name: 'Number of Passengers'
+  },
+  {
+    key: 'status',
+    name: 'Status'
+  },
+  {
+    key: 'coachName',
+    name: 'Coach Name'
+  },
+  {
+    key: 'routeId',
+    name: 'Route Id'
+  },
+  {
+    key: 'driverName',
+    name: 'Driver Name'
+  },
+  {
+    key: 'assistantName',
+    name: 'Assistant Name'
   },
 ];

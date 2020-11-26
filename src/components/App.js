@@ -1,5 +1,7 @@
-import React from 'react';
-import { Switch } from 'react-router';
+import React, { useEffect } from 'react';
+import { Switch, useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
 
 import AppRoute from './AppRoute';
 import MainLayout from './MainLayout';
@@ -17,12 +19,28 @@ import RouteList from './Route/RouteList';
 import RouteForm from './Route/RouteForm';
 import RouteDetail from './Route/RouteDetail';
 
+import TripList from './Trip/TripList';
+import TripForm from './Trip/TripForm';
+import TripDetail from './Trip/TripDetail';
+
 import LogIn from './LogIn';
 import HomePage from './HomePage';
 
 import '../styles/index.scss';
+import authenticationActions from '../actions/authentication.actions';
 
 const App = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  
+  useEffect(() => {
+    dispatch(authenticationActions.validate()).then(result => {
+      if (_.isEmpty(result)) {
+        history.push('/login');
+      }
+    });
+  }, []);
+
   return (
     <div>
       <Switch>
@@ -41,7 +59,10 @@ const App = (props) => {
         <AppRoute path='/route/:id/edit' component={RouteForm} layout={MainLayout} />
         <AppRoute path='/route/:id' component={RouteDetail} layout={MainLayout} />
 
-        
+        <AppRoute path='/trips' component={TripList} layout={MainLayout} />
+        <AppRoute path='/trip/add' component={TripForm} layout={MainLayout} />
+        <AppRoute path='/trip/:id/edit' component={TripForm} layout={MainLayout} />
+        <AppRoute path='/trip/:id' component={TripDetail} layout={MainLayout} />
 
         <AppRoute path='/login' component={LogIn} layout={MainLayout} needAuth={false} />
         <AppRoute exact path='/' component={HomePage} layout={MainLayout} />

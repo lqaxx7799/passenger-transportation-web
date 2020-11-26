@@ -1,9 +1,13 @@
 import { getToken, setToken, base } from './base.services';
 
-const isAuthenticated = () => {
+const validate = () => {
   const token = getToken();
-  // TODO: implement check token validity
-  return !!token;
+  if (!token) {
+    return new Promise((resolve, reject) => {
+      return resolve({});
+    });
+  }
+  return base.requests.get('/validate');
 }
 
 const logIn = (username, password) => {
@@ -31,7 +35,7 @@ const register = (body) => {
 }
 
 const authenticationServices = {
-  isAuthenticated,
+  validate,
   logIn,
   register,
 }

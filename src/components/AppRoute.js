@@ -1,8 +1,9 @@
 import React from 'react';
+import _ from 'lodash';
+import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router';
-import { base } from '../services/base.services';
-import authenticationServices from '../services/authentication.services';
 import MainLayout from './MainLayout';
+import { getToken } from '../services/base.services';
 
 const AppRoute = ({
   component: Component,
@@ -10,11 +11,12 @@ const AppRoute = ({
   needAuth: needAuth = true,
   ...rest
 }) => {
+
   return (
     <Route
       {...rest}
       render={(props) => (
-        !needAuth || authenticationServices.isAuthenticated()
+        !needAuth || !!getToken()
           ? <Layout><Component {...props} /></Layout>
           : <Redirect to='/login' />
       )}
