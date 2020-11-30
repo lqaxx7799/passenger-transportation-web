@@ -22,6 +22,9 @@ export const constants = {
   AUTHENTICATION_LOGGED_IN: 'AUTHENTICATION_LOGGED_IN',
   AUTHENTICATION_LOGGED_OUT: 'AUTHENTICATION_LOGGED_OUT',
 
+  COACH_STATISTIC_LOADING: 'COACH_STATISTIC_LOADING',
+  COACH_STATISTIC_LOADED: 'COACH_STATISTIC_LOADED',
+
   ASYNC_START: 'ASYNC_START',
   ASYNC_END: 'ASYNC_END',
 };
@@ -62,10 +65,10 @@ export const DEFAULT_TRIP = {
   numberOfPassengers: '',
   ticketPrice: '',
   status: '',
-  coachId: '',
-  employee1Id: '', // driver
-  employee2Id: '', // assistant
-  routeId: '',
+  coach: {},
+  employee1: '', // driver
+  employee2: '', // assistant
+  route: '',
 }
 
 export const COACH_DATA_TABLE_CONFIG = [
@@ -226,4 +229,31 @@ export const TRIP_DATA_TABLE_CONFIG = [
     key: 'assistantName',
     name: 'Assistant Name'
   },
+  {
+    key: 'action',
+    name: 'Action'
+  },
 ];
+
+export const COACH_STATISTIC_TABLE = [
+  {
+    key: 'no',
+    name: 'No',
+  },
+  {
+    key: 'licensePlate',
+    name: 'License Plate',
+  },
+  {
+    key: 'coachModel',
+    name: 'Coach Model',
+  },
+  {
+    key: 'revenue',
+    name: 'Revenue',
+  },
+  {
+    key: 'action',
+    name: 'Action',
+  }
+]

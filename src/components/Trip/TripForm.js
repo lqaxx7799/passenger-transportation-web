@@ -52,8 +52,8 @@ const TripForm = (props) => {
   }
 
   const submitTrip = () => {
-    dispatch(tripActions.submitRoute(editingTrip)).then(result => {
-      history.push('/routes');
+    dispatch(tripActions.submitTrip(editingTrip)).then(result => {
+      history.push('/trips');
     }).catch(error => alert('There was an error'));
   }
 
@@ -84,8 +84,8 @@ const TripForm = (props) => {
           <Form>
             <h3>Trip Information</h3>
             <div className="bx--row">
-              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-8">
-              <DatePicker
+              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-6">
+                <DatePicker
                   dateFormat="Y-m-d"
                   datePickerType="single"
                   onSelect={(e) => onEditTrip('arrivalTime', e.target.value)}
@@ -99,7 +99,22 @@ const TripForm = (props) => {
                   />
                 </DatePicker>
               </div>
-              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-8">
+              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-6">
+                <DatePicker
+                  dateFormat="Y-m-d"
+                  datePickerType="single"
+                  onSelect={(e) => onEditTrip('departureTime', e.target.value)}
+                >
+                  <DatePickerInput
+                    id="date-picker-default-id"
+                    placeholder="yyyy-mm-dd"
+                    labelText="Departure Time"
+                    type="text"
+                    value={editingTrip.departureTime}
+                  />
+                </DatePicker>
+              </div>
+              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-4">
                 <TextInput
                   invalidText="Invalid error message."
                   labelText="Ticket Price"
@@ -111,13 +126,18 @@ const TripForm = (props) => {
             </div>
 
             <div className="bx--row">
-              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-8">
+              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-6">
                 <Select
                   invalidText="Invalid error message."
                   labelText="Coach"
                   value={editingTrip.coachId}
-                  onChange={(e) => onEditTrip('coachId', e.target.value)}
+                  onChange={(e) => onEditTrip('coach', e.target.value)}
                 >
+                   <SelectItem
+                      key="0"
+                      text="- Select coach -"
+                      value=""
+                    />
                   {_.map(coaches, (coach, index) => (
                     <SelectItem
                       key={index}
@@ -127,13 +147,18 @@ const TripForm = (props) => {
                   ))}
                 </Select>
               </div>
-              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-8">
+              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-6">
                 <Select
                   invalidText="Invalid error message."
                   labelText="Route"
                   value={editingTrip.routeId}
-                  onChange={(e) => onEditTrip('routeId', e.target.value)}
+                  onChange={(e) => onEditTrip('route', e.target.value)}
                 >
+                  <SelectItem
+                      key="0"
+                      text="- Select route -"
+                      value=""
+                    />
                   {_.map(routes, (route, index) => (
                     <SelectItem
                       key={index}
@@ -145,13 +170,18 @@ const TripForm = (props) => {
               </div>
             </div>
             <div className="bx--row">
-              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-8">
+              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-6">
                 <Select
                   invalidText="Invalid error message."
                   labelText="Driver"
                   value={editingTrip.employeeId1}
-                  onChange={(e) => onEditTrip('employeeId1', e.target.value)}
+                  onChange={(e) => onEditTrip('employee1', e.target.value)}
                 >
+                  <SelectItem
+                      key="0"
+                      text="- Select driver -"
+                      value=""
+                    />
                   {_.map(employees, (employee, index) => (
                     <SelectItem
                       key={index}
@@ -161,13 +191,18 @@ const TripForm = (props) => {
                   ))}
                 </Select>
               </div>
-              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-8">
+              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-6">
                 <Select
                   invalidText="Invalid error message."
                   labelText="Assistant"
-                  value={editingTrip.employeeId1}
-                  onChange={(e) => onEditTrip('employeeId2', e.target.value)}
+                  value={editingTrip.employeeId2}
+                  onChange={(e) => onEditTrip('employee2', e.target.value)}
                 >
+                  <SelectItem
+                      key="0"
+                      text="- Select assistant -"
+                      value=""
+                    />
                   {_.map(employees, (employee, index) => (
                     <SelectItem
                       key={index}

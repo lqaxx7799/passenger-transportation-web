@@ -50,6 +50,11 @@ const initEditingTrip = (id) => {
 const editTrip = (key, value) => {
   return (dispatch, getState) => {
     const state = getState();
+    if (key === 'coach' || key === 'route' || key === 'employee1' || key === 'employee2') {
+      value = {
+        id: value,
+      };
+    }
     return dispatch({
       type: constants.TRIP_EDITING_CHANGED,
       payload: {
@@ -64,6 +69,9 @@ const submitTrip = (trip) => {
   return (dispatch) => {
     if (trip.id) {
       return tripServices.updateTrip(trip);
+    }
+    trip = {
+      ...trip,
     }
     return tripServices.addNewTrip(trip);
   }

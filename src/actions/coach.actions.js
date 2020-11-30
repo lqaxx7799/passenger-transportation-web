@@ -21,6 +21,27 @@ const loadAllCoaches = () => {
   }
 }
 
+const getCoachStatistic = (from, to) => {
+  return (dispatch) => {
+    dispatch({
+      type: constants.COACH_STATISTIC_LOADING,
+    });
+    return coachServices.getCoachStatistic(from, to)
+      .then(result => {
+        dispatch({
+          type: constants.COACH_STATISTIC_LOADED,
+          payload: result,
+        });
+      }).catch(error => {
+        console.log(error);
+        dispatch({
+          type: constants.COACH_STATISTIC_LOADED,
+          payload: [],
+        });
+      });
+  }
+}
+
 const initEditingCoach = (id) => {
   return (dispatch) => {
     dispatch({
@@ -83,6 +104,7 @@ const deleteCoach = (id) => {
 
 export default {
   loadAllCoaches,
+  getCoachStatistic,
   initEditingCoach,
   editCoach,
   submitCoach,

@@ -3,9 +3,12 @@ import { base } from './base.services';
 const loadAllCoaches = () => {
   return base.requests.get('/coach');
 }
-
 const getCoachById = (id) => {
   return base.requests.get(`/coach/${id}`);
+}
+
+const getCoachStatistic = (from, to) => {
+  return base.requests.get(`/statisticCoachRevenue/${from}/${to}`);
 }
 
 const addNewCoach = (coach) => {
@@ -23,6 +26,7 @@ const deleteCoach = (id) => {
 export default {
   loadAllCoaches,
   getCoachById,
+  getCoachStatistic,
   addNewCoach,
   updateCoach,
   deleteCoach,

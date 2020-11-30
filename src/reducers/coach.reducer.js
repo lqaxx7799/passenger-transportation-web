@@ -4,6 +4,7 @@ const defaultState = {
   loading: false,
   coaches: [],
   editingCoach: {},
+  statistic: [],
 };
 
 const coachReducer = (state = defaultState, action) => {
@@ -12,11 +13,22 @@ const coachReducer = (state = defaultState, action) => {
       return {
         ...state,
         loading: true,
-      } 
+      };
     case constants.COACH_LOADED: 
       return {
         ...state,
         coaches: action.payload,
+        loading: false,
+      };
+    case constants.COACH_STATISTIC_LOADING: 
+      return {
+        ...state,
+        loading: true,
+      } 
+    case constants.COACH_STATISTIC_LOADED: 
+      return {
+        ...state,
+        statistic: action.payload,
         loading: false,
       };
     case constants.COACH_EDITING_LOADED:
