@@ -42,6 +42,26 @@ const getCoachStatistic = (from, to) => {
   }
 }
 
+const getCoachMaintainanceData = () => {
+  return (dispatch) => {
+    dispatch({
+      type: constants.COACH_MAINTAINANCE_DATA_LOADING,
+    });
+    return coachServices.getCoachMaintainanceData().then(result => {
+      dispatch({
+        type: constants.COACH_MAINTAINANCE_DATA_LOADED,
+        payload: result,
+      });
+    }).catch(error => {
+      console.log(error);
+      dispatch({
+        type: constants.COACH_MAINTAINANCE_DATA_LOADED,
+        payload: [],
+      });
+    });
+  }
+}
+
 const initEditingCoach = (id) => {
   return (dispatch) => {
     dispatch({
@@ -105,6 +125,7 @@ const deleteCoach = (id) => {
 export default {
   loadAllCoaches,
   getCoachStatistic,
+  getCoachMaintainanceData,
   initEditingCoach,
   editCoach,
   submitCoach,

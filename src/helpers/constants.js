@@ -25,6 +25,9 @@ export const constants = {
   COACH_STATISTIC_LOADING: 'COACH_STATISTIC_LOADING',
   COACH_STATISTIC_LOADED: 'COACH_STATISTIC_LOADED',
 
+  COACH_MAINTAINANCE_DATA_LOADING: 'COACH_MAINTAINANCE_DATA_LOADING',
+  COACH_MAINTAINANCE_DATA_LOADED: 'COACH_MAINTAINANCE_DATA_LOADED',
+
   EMPLOYEE_SALARY_STATISTIC_LOADING: 'EMPLOYEE_SALARY_STATISTIC_LOADING',
   EMPLOYEE_SALARY_STATISTIC_LOADED: 'EMPLOYEE_SALARY_STATISTIC_LOADED',
 
@@ -285,6 +288,44 @@ export const EMPLOYEE_SALARY_STATISTIC_TABLE = [
   {
     key: 'totalLateHours',
     name: 'Total late hours',
+  },
+  {
+    key: 'action',
+    name: 'Action',
+  }
+];
+
+export const COACH_NEXT_MAINTAINANCE_TABLE = [
+  {
+    key: 'id',
+    name: 'Coach Id',
+  },
+  {
+    key: 'coachModel',
+    name: 'Coach Model',
+  },
+  {
+    key: 'next',
+    name: 'Next maintainance date',
+  },
+  {
+    key: 'action',
+    name: 'Action',
+  }
+];
+
+export const COACH_OVER_MAINTAINANCE_TABLE = [
+  {
+    key: 'id',
+    name: 'Coach Id',
+  },
+  {
+    key: 'coachModel',
+    name: 'Coach Model',
+  },
+  {
+    key: 'overDays',
+    name: 'Over days',
   },
   {
     key: 'action',

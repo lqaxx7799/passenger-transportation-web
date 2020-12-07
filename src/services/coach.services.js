@@ -11,6 +11,10 @@ const getCoachStatistic = (from, to) => {
   return base.requests.get(`/statisticCoachRevenue/${from}/${to}`);
 }
 
+const getCoachMaintainanceData = () => {
+  return base.requests.get('/nextMaintenance');
+}
+
 const addNewCoach = (coach) => {
   return base.requests.post('/coach', coach);
 }
@@ -27,6 +31,7 @@ export default {
   loadAllCoaches,
   getCoachById,
   getCoachStatistic,
+  getCoachMaintainanceData,
   addNewCoach,
   updateCoach,
   deleteCoach,

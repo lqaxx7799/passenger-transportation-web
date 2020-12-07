@@ -36,10 +36,6 @@ const EmployeeSalaryStatistic = (props) => {
 
   const { statistic, loading } = employeeState;
 
-  // useEffect(() => {
-  //   dispatch(coachActions.getCoachStatistic('2020-10-10 00:00:00', '2020-12-30 00:00:00'));
-  // }, [dispatch]);
-
   const viewStatistic = () => {
     dispatch(employeeActions.getEmployeeSalaryStatistic(year, month));
   }

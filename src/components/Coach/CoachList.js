@@ -140,7 +140,10 @@ const CoachList = (props) => {
       </div>
       <div className="bx--row landing-page__banner">
         <div className="bx--col-lg-16">
-          <Link to='/coach/add'>Add new</Link>
+          <div style={{ marginBottom: '20px' }}>
+            <Link to='/coach/add'>Add new</Link>&nbsp;
+            <Link to='/coach/maintainance'>View maintainance status</Link>
+          </div>
           {
             loading
               ? <div>Loading...</div>

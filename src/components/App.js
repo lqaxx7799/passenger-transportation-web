@@ -10,6 +10,7 @@ import BlankLayout from './BlankLayout';
 import CoachList from './Coach/CoachList';
 import CoachForm from './Coach/CoachForm';
 import CoachDetail from './Coach/CoachDetail';
+import CoachMaintainance from './Coach/CoachMaintainance';
 
 import EmployeeList from './Employee/EmployeeList';
 import EmployeeForm from './Employee/EmployeeForm';
@@ -49,6 +50,7 @@ const App = (props) => {
       <Switch>
         <AppRoute path='/coaches' component={CoachList} layout={MainLayout} />
         <AppRoute path='/coach/add' component={CoachForm} layout={MainLayout} />
+        <AppRoute path='/coach/maintainance' component={CoachMaintainance} layout={MainLayout} />
         <AppRoute path='/coach/:id/edit' component={CoachForm} layout={MainLayout} />
         <AppRoute path='/coach/:id' component={CoachDetail} layout={MainLayout} />
 
