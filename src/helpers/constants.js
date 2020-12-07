@@ -25,6 +25,9 @@ export const constants = {
   COACH_STATISTIC_LOADING: 'COACH_STATISTIC_LOADING',
   COACH_STATISTIC_LOADED: 'COACH_STATISTIC_LOADED',
 
+  EMPLOYEE_SALARY_STATISTIC_LOADING: 'EMPLOYEE_SALARY_STATISTIC_LOADING',
+  EMPLOYEE_SALARY_STATISTIC_LOADED: 'EMPLOYEE_SALARY_STATISTIC_LOADED',
+
   ASYNC_START: 'ASYNC_START',
   ASYNC_END: 'ASYNC_END',
 };
@@ -256,4 +259,35 @@ export const COACH_STATISTIC_TABLE = [
     key: 'action',
     name: 'Action',
   }
-]
+];
+
+export const EMPLOYEE_SALARY_STATISTIC_TABLE = [
+  {
+    key: 'no',
+    name: 'No',
+  },
+  {
+    key: 'employeeName',
+    name: 'Employee Name',
+  },
+  {
+    key: 'numberOfTripAsMain',
+    name: 'Number of trips as driver',
+  },
+  {
+    key: 'numberOfTripAsSup',
+    name: 'Number of trips as assistant',
+  },
+  {
+    key: 'salary',
+    name: 'Salary',
+  },
+  {
+    key: 'totalLateHours',
+    name: 'Total late hours',
+  },
+  {
+    key: 'action',
+    name: 'Action',
+  }
+];

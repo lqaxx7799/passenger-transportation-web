@@ -4,6 +4,7 @@ const defaultState = {
   loading: false,
   employees: [],
   editingEmployee: {},
+  statistic: [],
 };
 
 const employeeReducer = (state = defaultState, action) => {
@@ -17,6 +18,17 @@ const employeeReducer = (state = defaultState, action) => {
       return {
         ...state,
         employees: action.payload,
+        loading: false,
+      };
+    case constants.EMPLOYEE_SALARY_STATISTIC_LOADING: 
+      return {
+        ...state,
+        loading: true,
+      } 
+    case constants.EMPLOYEE_SALARY_STATISTIC_LOADED: 
+      return {
+        ...state,
+        statistic: action.payload,
         loading: false,
       };
     case constants.EMPLOYEE_EDITING_LOADED:

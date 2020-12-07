@@ -27,6 +27,7 @@ import LogIn from './LogIn';
 import HomePage from './HomePage';
 
 import CoachStatistic from './Statistic/CoachStatistic';
+import EmployeeSalaryStatistic from './Statistic/EmployeeSalaryStatistic';
 
 import '../styles/index.scss';
 import authenticationActions from '../actions/authentication.actions';
@@ -67,6 +68,7 @@ const App = (props) => {
         <AppRoute path='/trip/:id' component={TripDetail} layout={MainLayout} />
 
         <AppRoute path='/statistic/coach' component={CoachStatistic} layout={MainLayout} />
+        <AppRoute path='/statistic/employee-salary' component={EmployeeSalaryStatistic} layout={MainLayout} />
 
         <AppRoute path='/login' component={LogIn} layout={MainLayout} needAuth={false} />
         <AppRoute exact path='/' component={HomePage} layout={MainLayout} />

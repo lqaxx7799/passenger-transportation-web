@@ -35,7 +35,10 @@ const MainLayout = (props) => {
               <HeaderMenuItem element={Link} to="/employees">Employee</HeaderMenuItem>
               <HeaderMenuItem element={Link} to="/routes">Route</HeaderMenuItem>
               <HeaderMenuItem element={Link} to="/trips">Trip</HeaderMenuItem>
-              <HeaderMenuItem element={Link} to="/statistic/coach">Coach Statistic</HeaderMenuItem>
+              <HeaderMenu aria-label="Statistic" menuLinkName="Statistic">
+                <HeaderMenuItem element={Link} to="/statistic/coach">Coach</HeaderMenuItem>
+                <HeaderMenuItem element={Link} to="/statistic/employee-salary">Employee Salary</HeaderMenuItem>
+              </HeaderMenu>
             </>
           ) : (
             <>

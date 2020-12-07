@@ -8,6 +8,10 @@ const getEmployeeById = (id) => {
   return base.requests.get(`/employee/${id}`);
 }
 
+const getEmployeeSalaryStatistic = (year, month) => {
+  return base.requests.get(`/salary_statistic/${year}/${month}`);
+}
+
 const addNewEmployee = (employee) => {
   return base.requests.post('/employee', employee);
 }
@@ -23,6 +27,7 @@ const deleteEmployee = (id) => {
 export default {
   loadAllEmployees,
   getEmployeeById,
+  getEmployeeSalaryStatistic,
   addNewEmployee,
   updateEmployee,
   deleteEmployee,

@@ -11,7 +11,6 @@ import {
   DataTable,
   DatePicker,
   DatePickerInput,
-  ModalWrapper,
   Table,
   TableBody,
   TableCell,
@@ -19,66 +18,59 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TextInput,
   TimePicker,
 } from 'carbon-components-react';
 import View20 from '@carbon/icons-react/lib/view/20';
 
-import coachActions from '../../actions/coach.actions';
-import { COACH_STATISTIC_TABLE } from '../../helpers/constants';
-import CoachStatisticDetail from './CoachStatisticDetail';
+import employeeActions from '../../actions/employee.actions';
+import { EMPLOYEE_SALARY_STATISTIC_TABLE } from '../../helpers/constants';
 
-const CoachStatistic = (props) => {
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
+const EmployeeSalaryStatistic = (props) => {
+  const [year, setYear] = useState('');
+  const [month, setMonth] = useState('');
 
-  const coachState = useSelector(state => state.coachReducer);
+  const employeeState = useSelector(state => state.employeeReducer);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { statistic, loading } = coachState;
+  const { statistic, loading } = employeeState;
 
   // useEffect(() => {
   //   dispatch(coachActions.getCoachStatistic('2020-10-10 00:00:00', '2020-12-30 00:00:00'));
   // }, [dispatch]);
 
   const viewStatistic = () => {
-    dispatch(coachActions.getCoachStatistic(from + ' 00:00:00', to + ' 00:00:00'));
+    dispatch(employeeActions.getEmployeeSalaryStatistic(year, month));
   }
 
-  const showCoachDetail = (id) => {
+  const showEmployeeDetail = (id) => {
     console.log('show detail' + id);
-    // history.push(`/coach/${id}`);
-  }
-
-  const renderDetailModal = (id) => {
-    return (
-      <ModalWrapper
-        hasScrollingContent
-        passiveModal
-        size="lg"
-        modalHeading="Coach Revenue Detail"
-        triggerButtonIconDescription="View coach revenue detail"
-        modalLabel=""
-        buttonTriggerClassName="bx--btn--sm bx--btn--icon-only"
-        renderTriggerButtonIcon={View20}
-        triggerButtonKind="primary"
-      >
-        <CoachStatisticDetail 
-          data={_.find(statistic, item => _.get(item, 'coach.id') === id)}
-        />
-      </ModalWrapper>
-    );
+    history.push(`/employee/${id}`);
   }
 
   const renderStatistic = () => {
-    console.log(statistic);
+    
     const formattedStatistic = _.map(statistic, (item, index) => {
       return {
+        id: _.get(item, 'employee.id'),
         no: index + 1,
-        licensePlate: _.get(item, 'coach.licensePlate'),
-        coachModel: _.get(item, 'coach.coachModel'),
-        revenue: _.get(item, 'revenue'),
-        action: renderDetailModal(_.get(item, 'coach.id')),
+        employeeName: _.get(item, 'employee.employeeName'),
+        numberOfTripAsMain: _.get(item, 'numberOfTripAsMain'),
+        numberOfTripAsSup: _.get(item, 'numberOfTripAsSup'),
+        salary: _.get(item, 'salary'),
+        totalLateHours: _.get(item, 'totalLateHours'),
+        action: (
+          <Button
+            hasIconOnly
+            renderIcon={View20}
+            tooltipAlignment="center"
+            tooltipPosition="bottom"
+            iconDescription="View employee detail"
+            size="small"
+            onClick={() => showEmployeeDetail(_.get(item, 'employee.id'))}
+          />
+        ),
       };
     });
 
@@ -86,7 +78,7 @@ const CoachStatistic = (props) => {
       <div className="bx--col-lg-16">
         <DataTable
           rows={formattedStatistic}
-          headers={COACH_STATISTIC_TABLE}
+          headers={EMPLOYEE_SALARY_STATISTIC_TABLE}
           useZebraStyles={true}
           render={({ rows, headers, getHeaderProps, getTableProps }) => (
             <TableContainer title="DataTable">
@@ -100,7 +92,7 @@ const CoachStatistic = (props) => {
                     ))}
                   </TableRow>
                 </TableHead>
-                <TableBody style={{ minHeight: '300px' }}>
+                <TableBody>
                   {rows.map(row => (
                     <TableRow key={row.id}>
                       {row.cells.map(cell => (
@@ -126,46 +118,41 @@ const CoachStatistic = (props) => {
             </BreadcrumbItem>
           </Breadcrumb>
           <h1 className="landing-page__heading">
-            Coach Revenue Statistic
+            Employee Salary Statistic
           </h1>
         </div>
       </div>
 
       <div className="bx--row" style={{ marginBottom: '20px' }}>
-        <DatePicker
-          dateFormat="Y-m-d"
-          datePickerType="single"
-          onSelect={(e) => setFrom(e.target.value)}
-        >
-          <DatePickerInput
-            id="date-picker-default-id"
-            placeholder="yyyy-mm-dd"
-            labelText="From"
-            type="text"
-            value={from}
+        <div style={{ marginBottom: '2rem' }} className="bx--col-lg-4">
+          <TextInput
+            invalidText="Invalid error message."
+            labelText=""
+            placeholder="Insert month"
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
           />
-        </DatePicker>
-        <DatePicker
-          dateFormat="Y-m-d"
-          datePickerType="single"
-          onSelect={(e) => setTo(e.target.value)}
-        >
-          <DatePickerInput
-            id="date-picker-default-id"
-            placeholder="yyyy-mm-dd"
-            labelText="To"
-            type="text"
-            value={to}
+        </div>
+        <div style={{ marginBottom: '2rem' }} className="bx--col-lg-4">
+          <TextInput
+            invalidText="Invalid error message."
+            labelText=""
+            placeholder="Insert year"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
           />
-        </DatePicker>
-        <Button
-          kind="primary"
-          tabIndex={0}
-          type="button"
-          onClick={viewStatistic}
-        >
-          View Statistic
-        </Button>
+        </div>
+
+        <div style={{ marginBottom: '2rem' }} className="bx--col-lg-4">
+          <Button
+            kind="primary"
+            tabIndex={0}
+            type="button"
+            onClick={viewStatistic}
+          >
+            View Statistic
+          </Button>
+        </div>
       </div>
 
       <div className="bx--row landing-page__banner">
@@ -180,4 +167,4 @@ const CoachStatistic = (props) => {
   );
 };
 
-export default CoachStatistic;
+export default EmployeeSalaryStatistic;

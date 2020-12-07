@@ -21,6 +21,27 @@ const loadAllEmployees = () => {
   }
 }
 
+const getEmployeeSalaryStatistic = (year, month) => {
+  return (dispatch) => {
+    dispatch({
+      type: constants.EMPLOYEE_SALARY_STATISTIC_LOADING,
+    });
+    return employeeServices.getEmployeeSalaryStatistic(year, month)
+      .then(result => {
+        dispatch({
+          type: constants.EMPLOYEE_SALARY_STATISTIC_LOADED,
+          payload: result,
+        });
+      }).catch(error => {
+        console.log(error);
+        dispatch({
+          type: constants.EMPLOYEE_SALARY_STATISTIC_LOADED,
+          payload: [],
+        });
+      });
+  }
+}
+
 const initEditingEmployee = (id) => {
   return (dispatch) => {
     dispatch({
@@ -83,6 +104,7 @@ const deleteEmployee = (id) => {
 
 export default {
   loadAllEmployees,
+  getEmployeeSalaryStatistic,
   initEditingEmployee,
   editEmployee,
   submitEmployee,
