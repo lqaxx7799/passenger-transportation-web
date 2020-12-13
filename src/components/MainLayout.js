@@ -43,7 +43,7 @@ const MainLayout = (props) => {
           ) : (
             <>
               <HeaderMenuItem element={Link} to="/login">Log In</HeaderMenuItem>
-              <HeaderMenuItem element={Link} to="/register">Register</HeaderMenuItem>
+              {/* <HeaderMenuItem element={Link} to="/register">Register</HeaderMenuItem> */}
             </>
           )}
         </HeaderNavigation>

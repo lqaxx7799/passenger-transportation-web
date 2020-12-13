@@ -88,7 +88,7 @@ const TripList = (props) => {
                         ? <TableCell key={cell.id}>{cell.value}</TableCell>
                         : (
                           <TableCell key={cell.id}>
-                            <Button
+                            {/* <Button
                               hasIconOnly
                               renderIcon={View20}
                               tooltipAlignment="center"
@@ -96,7 +96,7 @@ const TripList = (props) => {
                               iconDescription="View trip detail"
                               size="small"
                               onClick={() => showTripDetail(row.id)}
-                            />
+                            /> */}
                             <Button
                               hasIconOnly
                               renderIcon={Edit20}

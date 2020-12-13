@@ -79,7 +79,7 @@ const RouteList = (props) => {
                         ? <TableCell key={cell.id}>{cell.value}</TableCell>
                         : (
                           <TableCell key={cell.id}>
-                            <Button
+                            {/* <Button
                               hasIconOnly
                               renderIcon={View20}
                               tooltipAlignment="center"
@@ -87,7 +87,7 @@ const RouteList = (props) => {
                               iconDescription="View route detail"
                               size="small"
                               onClick={() => showRouteDetail(row.id)}
-                            />
+                            /> */}
                             <Button
                               hasIconOnly
                               renderIcon={Edit20}

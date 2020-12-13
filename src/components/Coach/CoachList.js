@@ -79,7 +79,7 @@ const CoachList = (props) => {
                         ? <TableCell key={cell.id}>{cell.value}</TableCell>
                         : (
                           <TableCell key={cell.id}>
-                            <Button
+                            {/* <Button
                               hasIconOnly
                               renderIcon={View20}
                               tooltipAlignment="center"
@@ -87,7 +87,7 @@ const CoachList = (props) => {
                               iconDescription="View coach detail"
                               size="small"
                               onClick={() => showCoachDetail(row.id)}
-                            />
+                            /> */}
                             <Button
                               hasIconOnly
                               renderIcon={Edit20}
