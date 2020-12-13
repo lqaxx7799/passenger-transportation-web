@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const API_ROOT = 'http://localhost:8080';
+let API_ROOT;
+if (process.env.NODE_ENV === 'production') {
+  API_ROOT = 'https://passenger-transportation-api.herokuapp.com'
+} else {
+  API_ROOT = 'http://localhost:8080';
+}
 
 export const setToken = (token) => {
   document.cookie = 'PT_TOKEN=' + token;
