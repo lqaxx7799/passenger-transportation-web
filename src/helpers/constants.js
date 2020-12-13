@@ -72,9 +72,9 @@ export const DEFAULT_TRIP = {
   ticketPrice: '',
   status: '',
   coach: {},
-  employee1: '', // driver
-  employee2: '', // assistant
-  route: '',
+  employee1: {}, // driver
+  employee2: {}, // assistant
+  route: {},
 }
 
 export const COACH_DATA_TABLE_CONFIG = [

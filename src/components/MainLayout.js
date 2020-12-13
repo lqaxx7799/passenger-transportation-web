@@ -13,7 +13,12 @@ import {
   HeaderNavigation,
   HeaderMenu,
   HeaderMenuItem,
-  HeaderMenuButton
+  HeaderMenuButton,
+  HeaderContainer,
+  SkipToContent,
+  SideNav,
+  SideNavItems,
+  HeaderSideNavItems
 } from 'carbon-components-react/lib/components/UIShell';
 
 import authenticationServices from '../services/authentication.services';
@@ -23,51 +28,83 @@ const MainLayout = (props) => {
   const authenticationState = useSelector(state => state.authenticationReducer);
   const isAuthenticated = !_.isEmpty(authenticationState.currentAccount);
   return (
-    <div>
-      <Header>
-        <HeaderName element={Link} to="/" prefix=''>
-          Passenger Transportation
-        </HeaderName>
-        <HeaderNavigation>
-          {isAuthenticated ? (
-            <>
-              <HeaderMenuItem element={Link} to="/coaches">Coach</HeaderMenuItem>
-              <HeaderMenuItem element={Link} to="/employees">Employee</HeaderMenuItem>
-              <HeaderMenuItem element={Link} to="/routes">Route</HeaderMenuItem>
-              <HeaderMenuItem element={Link} to="/trips">Trip</HeaderMenuItem>
-              <HeaderMenu aria-label="Statistic" menuLinkName="Statistic">
-                <HeaderMenuItem element={Link} to="/statistic/coach">Coach</HeaderMenuItem>
-                <HeaderMenuItem element={Link} to="/statistic/employee-salary">Employee Salary</HeaderMenuItem>
-              </HeaderMenu>
-            </>
-          ) : (
-            <>
-              <HeaderMenuItem element={Link} to="/login">Log In</HeaderMenuItem>
-              {/* <HeaderMenuItem element={Link} to="/register">Register</HeaderMenuItem> */}
-            </>
-          )}
-        </HeaderNavigation>
-        <HeaderGlobalBar>
-          {isAuthenticated && (
-            <>
-              <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
-                <Search20 />
-              </HeaderGlobalAction>
-              <HeaderGlobalAction aria-label="Notifications" onClick={() => {}}>
-                <Notification20 />
-              </HeaderGlobalAction>
-              <HeaderGlobalAction aria-label="App Switcher" onClick={() => {}}>
-                <AppSwitcher20 />
-              </HeaderGlobalAction>
-            </>
-          )}
-        </HeaderGlobalBar>
-      </Header>
-      <div className='pt-main-body'>
-        {props.children}
-      </div>
-      <div>Footer</div>
-    </div>
+    <HeaderContainer
+      render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+        <>
+          <Header>
+            <SkipToContent />
+            <HeaderMenuButton
+              aria-label="Open menu"
+              onClick={onClickSideNavExpand}
+              isActive={isSideNavExpanded}
+            />
+            <HeaderName element={Link} to="/" prefix=''>
+              Passenger Transportation
+            </HeaderName>
+            <HeaderNavigation>
+              {isAuthenticated ? (
+                <>
+                  <HeaderMenuItem element={Link} to="/coaches">Coach</HeaderMenuItem>
+                  <HeaderMenuItem element={Link} to="/employees">Employee</HeaderMenuItem>
+                  <HeaderMenuItem element={Link} to="/routes">Route</HeaderMenuItem>
+                  <HeaderMenuItem element={Link} to="/trips">Trip</HeaderMenuItem>
+                  <HeaderMenu aria-label="Statistic" menuLinkName="Statistic">
+                    <HeaderMenuItem element={Link} to="/statistic/coach">Coach</HeaderMenuItem>
+                    <HeaderMenuItem element={Link} to="/statistic/employee-salary">Employee Salary</HeaderMenuItem>
+                  </HeaderMenu>
+                </>
+              ) : (
+                <>
+                  <HeaderMenuItem element={Link} to="/login">Log In</HeaderMenuItem>
+                  {/* <HeaderMenuItem element={Link} to="/register">Register</HeaderMenuItem> */}
+                </>
+              )}
+            </HeaderNavigation>
+            <HeaderGlobalBar>
+              {isAuthenticated && (
+                <>
+                  <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
+                    <Search20 />
+                  </HeaderGlobalAction>
+                  <HeaderGlobalAction aria-label="Notifications" onClick={() => {}}>
+                    <Notification20 />
+                  </HeaderGlobalAction>
+                  <HeaderGlobalAction aria-label="App Switcher" onClick={() => {}}>
+                    <AppSwitcher20 />
+                  </HeaderGlobalAction>
+                </>
+              )}
+            </HeaderGlobalBar>
+            <SideNav aria-label="Side navigation" expanded={isSideNavExpanded} isPersistent={false}>
+              <SideNavItems>
+                <HeaderSideNavItems hasDivider={true}>
+                  {isAuthenticated ? (
+                    <>
+                      <HeaderMenuItem element={Link} to="/coaches">Coach</HeaderMenuItem>
+                      <HeaderMenuItem element={Link} to="/employees">Employee</HeaderMenuItem>
+                      <HeaderMenuItem element={Link} to="/routes">Route</HeaderMenuItem>
+                      <HeaderMenuItem element={Link} to="/trips">Trip</HeaderMenuItem>
+                      <HeaderMenu aria-label="Statistic" menuLinkName="Statistic">
+                        <HeaderMenuItem element={Link} to="/statistic/coach">Coach</HeaderMenuItem>
+                        <HeaderMenuItem element={Link} to="/statistic/employee-salary">Employee Salary</HeaderMenuItem>
+                      </HeaderMenu>
+                    </>
+                  ) : (
+                    <>
+                      <HeaderMenuItem element={Link} to="/login">Log In</HeaderMenuItem>
+                      {/* <HeaderMenuItem element={Link} to="/register">Register</HeaderMenuItem> */}
+                    </>
+                  )}
+                </HeaderSideNavItems>
+              </SideNavItems>
+            </SideNav>
+          </Header>
+          <div className='pt-main-body'>
+            {props.children}
+          </div>
+        </>
+      )}
+    />
   );
 }
 

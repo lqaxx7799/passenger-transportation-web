@@ -32,6 +32,7 @@ const TripForm = (props) => {
   const history = useHistory();
   
   const tripId = props.match.params.id;
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     dispatch(tripActions.initEditingTrip(tripId));
@@ -54,7 +55,14 @@ const TripForm = (props) => {
   const submitTrip = () => {
     dispatch(tripActions.submitTrip(editingTrip)).then(result => {
       history.push('/trips');
-    }).catch(error => alert('There was an error'));
+    })
+      .catch(error => {
+        if (_.get(error, 'response.data.Errors')) {
+          setErrors(error.response.data.Errors);
+        } else {
+          alert('There was an error');
+        }
+      });
   }
 
   if (loading) {
@@ -77,6 +85,13 @@ const TripForm = (props) => {
           <h1 className="landing-page__heading">
             Add new trip
           </h1>
+        </div>
+      </div>
+      <div className="bx--row landing-page__banner">
+        <div className="bx--col-lg-16" style={{ color: 'red' }}>
+          <ul>
+            {_.map(errors, (error, index) => <li key={index}>{error}</li>)}
+          </ul>
         </div>
       </div>
       <div className="bx--row landing-page__banner">
@@ -114,7 +129,10 @@ const TripForm = (props) => {
                   />
                 </DatePicker>
               </div>
-              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-4">
+            </div>
+
+            <div className="bx--row">
+              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-6">
                 <TextInput
                   invalidText="Invalid error message."
                   labelText="Ticket Price"
@@ -123,14 +141,22 @@ const TripForm = (props) => {
                   onChange={(e) => onEditTrip('ticketPrice', e.target.value)}
                 />
               </div>
+              <div style={{ marginBottom: '2rem' }} className="bx--col-lg-6">
+                <TextInput
+                  invalidText="Invalid error message."
+                  labelText="Number of Passengers"
+                  placeholder="Insert number of passengers"
+                  value={editingTrip.numberOfPassengers}
+                  onChange={(e) => onEditTrip('numberOfPassengers', e.target.value)}
+                />
+              </div>
             </div>
-
             <div className="bx--row">
               <div style={{ marginBottom: '2rem' }} className="bx--col-lg-6">
                 <Select
                   invalidText="Invalid error message."
                   labelText="Coach"
-                  value={editingTrip.coachId}
+                  value={_.get(editingTrip, 'coach.id')}
                   onChange={(e) => onEditTrip('coach', e.target.value)}
                 >
                    <SelectItem
@@ -151,7 +177,7 @@ const TripForm = (props) => {
                 <Select
                   invalidText="Invalid error message."
                   labelText="Route"
-                  value={editingTrip.routeId}
+                  value={_.get(editingTrip, 'route.id')}
                   onChange={(e) => onEditTrip('route', e.target.value)}
                 >
                   <SelectItem
@@ -174,7 +200,7 @@ const TripForm = (props) => {
                 <Select
                   invalidText="Invalid error message."
                   labelText="Driver"
-                  value={editingTrip.employeeId1}
+                  value={_.get(editingTrip ,'employee1.id')}
                   onChange={(e) => onEditTrip('employee1', e.target.value)}
                 >
                   <SelectItem
@@ -195,7 +221,7 @@ const TripForm = (props) => {
                 <Select
                   invalidText="Invalid error message."
                   labelText="Assistant"
-                  value={editingTrip.employeeId2}
+                  value={_.get(editingTrip, 'employee2.id')}
                   onChange={(e) => onEditTrip('employee2', e.target.value)}
                 >
                   <SelectItem

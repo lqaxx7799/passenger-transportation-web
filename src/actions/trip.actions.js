@@ -35,7 +35,13 @@ const initEditingTrip = (id) => {
     return tripServices.getTripById(id).then(result => {
       dispatch({
         type: constants.TRIP_EDITING_LOADED,
-        payload: result,
+        payload: {
+          ...result,
+          coach: { id: result.coach.id },
+          employee1: { id: result.employee1.id },
+          employee2: { id: result.employee2.id },
+          route: { id: result.coach.id },
+        },
       });
     }).catch(error => {
       console.log(error);

@@ -48,14 +48,14 @@ export const base = {
       axios(`${API_ROOT}${url}`, {
         method: 'PUT',
         headers: getBaseHeader(),
-        body: JSON.stringify(body),
+        data: JSON.stringify(body),
       })
       .then(response => response.data),
     patch: (url, body) =>
       axios(`${API_ROOT}${url}`, {
         method: 'PATCH',
         headers: getBaseHeader(),
-        body: JSON.stringify(body),
+        data: JSON.stringify(body),
       })
       .then(response => response.data),
     del: (url) =>

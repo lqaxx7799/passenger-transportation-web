@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import {
   Breadcrumb, 
   BreadcrumbItem,
+  Button,
   DataTable,
   Table,
   TableBody,
@@ -15,7 +16,10 @@ import {
   TableRow
 } from 'carbon-components-react';
 
-import { COACH_NEXT_MAINTAINANCE_TABLE } from '../../helpers/constants';
+import {
+  COACH_NEXT_MAINTAINANCE_TABLE,
+  COACH_OVER_MAINTAINANCE_TABLE
+} from '../../helpers/constants';
 import coachActions from '../../actions/coach.actions';
 
 const CoachMaintainance = (props) => {
@@ -27,7 +31,20 @@ const CoachMaintainance = (props) => {
     dispatch(coachActions.getCoachMaintainanceData());
   }, [dispatch]);
 
-  const { coachMaintainanceData, loading } = coachState;
+  const { coachMaintainanceData, loading, editingCoach } = coachState;
+
+  const maintainCoach = (id) => {
+    dispatch(coachActions.initEditingCoach(id))
+      .then(() => {
+        dispatch(coachActions.editCoach('lastMaintainedDate', new Date()))
+          .then(() => {
+            dispatch(coachActions.submitCoach(editingCoach))
+              .then(() => {
+                window.location.reload();
+              })
+          })
+      })
+  }
 
   const renderNextList = () => {
     const formattedRows = _.map(_.get(coachMaintainanceData, '0'), item => ({
@@ -75,16 +92,20 @@ const CoachMaintainance = (props) => {
     const formattedRows = _.map(_.get(coachMaintainanceData, '1'), item => ({
       id: _.get(item, 'coach.id'),
       coachModel: _.get(item, 'coach.coachModel'),
-      next: _.get(item, 'next'),
+      overDays: _.get(item, 'overDays'),
       action: (
-        <div>aaaa</div>
+        <Button
+          onClick={() => maintainCoach(_.get(item, 'coach.id'))}
+        >
+          Maintain
+        </Button>
       ),
     }));
 
     return (
       <DataTable
         rows={formattedRows}
-        headers={COACH_NEXT_MAINTAINANCE_TABLE}
+        headers={COACH_OVER_MAINTAINANCE_TABLE}
         useZebraStyles={true}
         render={({ rows, headers, getHeaderProps, getTableProps }) => (
           <TableContainer title="Over maintainance day">
