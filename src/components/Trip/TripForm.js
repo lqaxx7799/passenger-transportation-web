@@ -59,6 +59,8 @@ const TripForm = (props) => {
       .catch(error => {
         if (_.get(error, 'response.data.Errors')) {
           setErrors(error.response.data.Errors);
+        } else if (_.get(error, 'response.data.Cause')) {
+          setErrors([error.response.data.Cause]);
         } else {
           alert('There was an error');
         }

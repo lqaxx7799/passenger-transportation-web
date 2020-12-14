@@ -220,12 +220,12 @@ export const TRIP_DATA_TABLE_CONFIG = [
     name: 'Status'
   },
   {
-    key: 'coachName',
-    name: 'Coach Name'
+    key: 'coachModel',
+    name: 'Coach Model'
   },
   {
-    key: 'routeId',
-    name: 'Route Id'
+    key: 'route',
+    name: 'Route'
   },
   {
     key: 'driverName',

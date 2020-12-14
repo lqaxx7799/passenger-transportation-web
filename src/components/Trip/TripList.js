@@ -35,14 +35,6 @@ const TripList = (props) => {
 
   const { trips, loading } = tripState;
 
-  // const formattedTrips = _.map(trips, trip => {
-  //   return {
-  //     ...trip,
-  //     coachName: <span></span>,
-  //     routeId: '',
-  //   }
-  // })
-
   const showTripDetail = (id) => {
     console.log('show detail' + id);
     history.push(`/trip/${id}`);
@@ -63,9 +55,16 @@ const TripList = (props) => {
   }
 
   const renderList = () => {
+    const formattedTrips = _.map(trips, trip => ({
+      ...trip,
+      coachModel: _.get(trip, 'coach.coachModel'),
+      route: `${_.get(trip, 'startingPoint')} - ${_.get(trip, 'destinationPoint')}`,
+      driverName: _.get(trip, 'employee1.userName'),
+      assistantName: _.get(trip, 'employee2.userName'),
+    }));
     return (
       <DataTable
-        rows={trips}
+        rows={formattedTrips}
         headers={TRIP_DATA_TABLE_CONFIG}
         useZebraStyles={true}
         render={({ rows, headers, getHeaderProps, getTableProps }) => (
