@@ -38,7 +38,7 @@ const CoachMaintainance = (props) => {
       .then(() => {
         dispatch(coachActions.editCoach('lastMaintainedDate', new Date()))
           .then(() => {
-            dispatch(coachActions.submitCoach(editingCoach))
+            dispatch(coachActions.maintainCoach())
               .then(() => {
                 window.location.reload();
               })
@@ -52,7 +52,7 @@ const CoachMaintainance = (props) => {
       coachModel: _.get(item, 'coach.coachModel'),
       next: _.get(item, 'next'),
       action: (
-        <div>aaaa</div>
+        <div></div>
       ),
     }));
 

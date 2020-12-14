@@ -122,6 +122,13 @@ const deleteCoach = (id) => {
   }
 }
 
+const maintainCoach = () => {
+  return (dispatch, getState) => {
+    const state = getState();
+    return coachServices.updateCoach(_.get(state, 'coachReducer.editingCoach'));
+  }
+}
+
 export default {
   loadAllCoaches,
   getCoachStatistic,
@@ -129,5 +136,6 @@ export default {
   initEditingCoach,
   editCoach,
   submitCoach,
+  maintainCoach,
   deleteCoach,
 };
