@@ -58,9 +58,9 @@ const TripList = (props) => {
     const formattedTrips = _.map(trips, trip => ({
       ...trip,
       coachModel: _.get(trip, 'coach.coachModel'),
-      route: `${_.get(trip, 'startingPoint')} - ${_.get(trip, 'destinationPoint')}`,
-      driverName: _.get(trip, 'employee1.userName'),
-      assistantName: _.get(trip, 'employee2.userName'),
+      route: `${_.get(trip, 'route.startingPoint')} - ${_.get(trip, 'route.destinationPoint')}`,
+      driverName: _.get(trip, 'employee1.employeeName'),
+      assistantName: _.get(trip, 'employee2.employeeName'),
     }));
     return (
       <DataTable
