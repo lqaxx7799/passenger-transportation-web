@@ -1,0 +1,13 @@
+{
+  "singleQuote": true,
+  "printWidth": 125,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": "*.{js,jsx,scss,json}",
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}
