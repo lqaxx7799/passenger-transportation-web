@@ -24,7 +24,7 @@ import { EMPLOYEE_DATA_TABLE_CONFIG } from '../../helpers/constants';
 import commonActions from '../../actions/common.actions';
 
 const EmployeeList = (props) => {
-  const employeeState = useSelector(state => state.employeeReducer);
+  const employeeState = useSelector((state) => state.employeeReducer);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -35,23 +35,22 @@ const EmployeeList = (props) => {
   const { employees, loading } = employeeState;
 
   const showEmployeeDetail = (id) => {
-    console.log('show detail' + id);
+    console.log(`show detail${id}`);
     history.push(`/employee/${id}`);
-  }
+  };
 
   const editEmployee = (id) => {
-    console.log('edit' + id);
+    console.log(`edit${id}`);
     history.push(`/employee/${id}/edit`);
-  }
+  };
 
   const deleteEmployee = (id) => {
-    console.log('delete' + id);
-    dispatch(employeeActions.deleteEmployee(id))
-      .catch(error => {
-        console.log(1111111, error)
-        alert("Error");
-      })
-  }
+    console.log(`delete${id}`);
+    dispatch(employeeActions.deleteEmployee(id)).catch((error) => {
+      console.log(1111111, error);
+      alert('Error');
+    });
+  };
 
   const renderList = () => {
     return (
@@ -64,22 +63,20 @@ const EmployeeList = (props) => {
             <Table {...getTableProps()}>
               <TableHead>
                 <TableRow>
-                  {headers.map(header => (
-                    <TableHeader key={header.key}>
-                      {header.name}
-                    </TableHeader>
+                  {headers.map((header) => (
+                    <TableHeader key={header.key}>{header.name}</TableHeader>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map(row => (
+                {rows.map((row) => (
                   <TableRow key={row.id}>
-                    {row.cells.map(cell => (
-                      cell.info.header !== 'action'
-                        ? <TableCell key={cell.id}>{cell.value}</TableCell>
-                        : (
-                          <TableCell key={cell.id}>
-                            {/* <Button
+                    {row.cells.map((cell) =>
+                      cell.info.header !== 'action' ? (
+                        <TableCell key={cell.id}>{cell.value}</TableCell>
+                      ) : (
+                        <TableCell key={cell.id}>
+                          {/* <Button
                               hasIconOnly
                               renderIcon={View20}
                               tooltipAlignment="center"
@@ -88,41 +85,42 @@ const EmployeeList = (props) => {
                               size="small"
                               onClick={() => showEmployeeDetail(row.id)}
                             /> */}
-                            <Button
-                              hasIconOnly
-                              renderIcon={Edit20}
-                              tooltipAlignment="center"
-                              tooltipPosition="bottom"
-                              iconDescription="Edit employee"
-                              size="small"
-                              kind="secondary"
-                              onClick={() => editEmployee(row.id)}
-                            />
-                            <ModalWrapper
-                              buttonTriggerClassName="bx--btn--sm bx--btn--icon-only"
-                              renderTriggerButtonIcon={Delete20}
-                              triggerButtonKind="danger"
-                              triggerButtonIconDescription="Delete employee"
-                              size="xs"
-                              primaryButtonText="Delete"
-                              modalHeading="Delete this employee?"
-                              modalLabel="Confirming"
-                              danger
-                              handleSubmit={() => deleteEmployee(row.id)}
-                            >
-                              <p>Are you sure to delete this employee?</p>
-                            </ModalWrapper>
-                          </TableCell>
-                        )
-                    ))}
+                          <Button
+                            hasIconOnly
+                            renderIcon={Edit20}
+                            tooltipAlignment="center"
+                            tooltipPosition="bottom"
+                            iconDescription="Edit employee"
+                            size="small"
+                            kind="secondary"
+                            onClick={() => editEmployee(row.id)}
+                          />
+                          <ModalWrapper
+                            buttonTriggerClassName="bx--btn--sm bx--btn--icon-only"
+                            renderTriggerButtonIcon={Delete20}
+                            triggerButtonKind="danger"
+                            triggerButtonIconDescription="Delete employee"
+                            size="xs"
+                            primaryButtonText="Delete"
+                            modalHeading="Delete this employee?"
+                            modalLabel="Confirming"
+                            danger
+                            handleSubmit={() => deleteEmployee(row.id)}
+                          >
+                            <p>Are you sure to delete this employee?</p>
+                          </ModalWrapper>
+                        </TableCell>
+                      ),
+                    )}
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-          </TableContainer>)}
+          </TableContainer>
+        )}
       />
     );
-  }
+  };
 
   return (
     <>
@@ -133,23 +131,17 @@ const EmployeeList = (props) => {
               <Link to="/">Home</Link>
             </BreadcrumbItem>
           </Breadcrumb>
-          <h1 className="landing-page__heading">
-            Employee List
-          </h1>
+          <h1 className="landing-page__heading">Employee List</h1>
         </div>
       </div>
       <div className="bx--row landing-page__banner">
         <div className="bx--col-lg-16">
-          <Link to='/employee/add'>Add new</Link>
-          {
-            loading
-              ? <div>Loading...</div>
-              : renderList()
-          }
+          <Link to="/employee/add">Add new</Link>
+          {loading ? <div>Loading...</div> : renderList()}
         </div>
       </div>
     </>
   );
-}
+};
 
 export default EmployeeList;

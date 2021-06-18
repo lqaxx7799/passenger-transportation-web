@@ -20,18 +20,18 @@ const LogIn = (props) => {
       ...account,
       [key]: value,
     });
-  }
+  };
 
   const onSubmit = () => {
     dispatch(authenticationActions.logIn(account.username, account.password))
-      .then(result => {
+      .then((result) => {
         history.push('/');
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         alert('Error');
       });
-  }
+  };
 
   return (
     <div>
@@ -58,12 +58,9 @@ const LogIn = (props) => {
           />
         </div>
       </div>
-      <Button onClick={onSubmit}>
-        Log in
-      </Button>
+      <Button onClick={onSubmit}>Log in</Button>
     </div>
-
   );
-}
+};
 
 export default LogIn;

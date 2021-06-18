@@ -1,27 +1,27 @@
 import _ from 'lodash';
 import { constants } from './helpers/constants';
 
-const promiseMiddleware = store => next => action => {
+const promiseMiddleware = (store) => (next) => (action) => {
   if (isPromise(action.payload)) {
     store.dispatch({ type: constants.ASYNC_START, subtype: action.type });
 
     const currentView = store.getState().viewChangeCounter;
-    const skipTracking = action.skipTracking;
+    const { skipTracking } = action;
 
     action.payload.then(
-      res => {
-        const currentState = store.getState()
+      (res) => {
+        const currentState = store.getState();
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
-          return
+          return;
         }
         action.payload = res;
         store.dispatch({ type: constants.ASYNC_END, promise: action.payload });
         store.dispatch(action);
       },
-      error => {
-        const currentState = store.getState()
+      (error) => {
+        const currentState = store.getState();
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
-          return
+          return;
         }
         action.error = true;
         action.payload = _.get(error, 'response.body');
@@ -29,7 +29,7 @@ const promiseMiddleware = store => next => action => {
           store.dispatch({ type: constants.ASYNC_END, promise: action.payload });
         }
         store.dispatch(action);
-      }
+      },
     );
     return;
   }
@@ -40,4 +40,4 @@ function isPromise(v) {
   return v && typeof v.then === 'function';
 }
 
-export { promiseMiddleware }
+export { promiseMiddleware };

@@ -2,11 +2,11 @@ import { constants } from '../helpers/constants';
 
 const defaultState = {
   currentAccount: {},
-  isValidated: false
+  isValidated: false,
 };
 
 const authenticationReducer = (state = defaultState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case constants.AUTHENTICATION_LOGGED_IN:
       return {
         ...state,

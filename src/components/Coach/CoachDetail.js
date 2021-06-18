@@ -12,7 +12,7 @@ import {
   TableContainer,
   TableHead,
   TableHeader,
-  TableRow
+  TableRow,
 } from 'carbon-components-react';
 import View20 from '@carbon/icons-react/lib/view/20';
 import Edit20 from '@carbon/icons-react/lib/edit/20';
@@ -22,7 +22,7 @@ import coachActions from '../../actions/coach.actions';
 import { COACH_DATA_TABLE_CONFIG } from '../../helpers/constants';
 
 const CoachDetail = (props) => {
-  const coachState = useSelector(state => state.coachReducer);
+  const coachState = useSelector((state) => state.coachReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,16 +32,16 @@ const CoachDetail = (props) => {
   const { coaches, loading } = coachState;
 
   const showCoachDetail = (id) => {
-    console.log('show detail' + id);
-  }
+    console.log(`show detail${id}`);
+  };
 
   const editCoach = (id) => {
-    console.log('edit' + id);
-  }
+    console.log(`edit${id}`);
+  };
 
   const deleteCoach = (id) => {
-    console.log('delete' + id);
-  }
+    console.log(`delete${id}`);
+  };
 
   const renderList = () => {
     return (
@@ -54,61 +54,60 @@ const CoachDetail = (props) => {
             <Table {...getTableProps()}>
               <TableHead>
                 <TableRow>
-                  {headers.map(header => (
-                    <TableHeader key={header.key}>
-                      {header.name}
-                    </TableHeader>
+                  {headers.map((header) => (
+                    <TableHeader key={header.key}>{header.name}</TableHeader>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map(row => (
+                {rows.map((row) => (
                   <TableRow key={row.id}>
-                    {row.cells.map(cell => (
-                      cell.info.header !== 'action'
-                        ? <TableCell key={cell.id}>{cell.value}</TableCell>
-                        : (
-                          <TableCell key={cell.id}>
-                            <Button
-                              hasIconOnly
-                              renderIcon={View20}
-                              tooltipAlignment="center"
-                              tooltipPosition="bottom"
-                              iconDescription="View coach detail"
-                              size="small"
-                              onClick={() => showCoachDetail(row.id)}
-                            />
-                            <Button
-                              hasIconOnly
-                              renderIcon={Edit20}
-                              tooltipAlignment="center"
-                              tooltipPosition="bottom"
-                              iconDescription="Edit coach"
-                              size="small"
-                              kind="secondary"
-                              onClick={() => editCoach(row.id)}
-                            />
-                            <Button
-                              hasIconOnly
-                              renderIcon={Delete20}
-                              tooltipAlignment="center"
-                              tooltipPosition="bottom"
-                              iconDescription="Delete coach"
-                              kind="danger"
-                              size="small"
-                              onClick={() => deleteCoach(row.id)}
-                            />
-                          </TableCell>
-                        )
-                    ))}
+                    {row.cells.map((cell) =>
+                      cell.info.header !== 'action' ? (
+                        <TableCell key={cell.id}>{cell.value}</TableCell>
+                      ) : (
+                        <TableCell key={cell.id}>
+                          <Button
+                            hasIconOnly
+                            renderIcon={View20}
+                            tooltipAlignment="center"
+                            tooltipPosition="bottom"
+                            iconDescription="View coach detail"
+                            size="small"
+                            onClick={() => showCoachDetail(row.id)}
+                          />
+                          <Button
+                            hasIconOnly
+                            renderIcon={Edit20}
+                            tooltipAlignment="center"
+                            tooltipPosition="bottom"
+                            iconDescription="Edit coach"
+                            size="small"
+                            kind="secondary"
+                            onClick={() => editCoach(row.id)}
+                          />
+                          <Button
+                            hasIconOnly
+                            renderIcon={Delete20}
+                            tooltipAlignment="center"
+                            tooltipPosition="bottom"
+                            iconDescription="Delete coach"
+                            kind="danger"
+                            size="small"
+                            onClick={() => deleteCoach(row.id)}
+                          />
+                        </TableCell>
+                      ),
+                    )}
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-          </TableContainer>)}
+          </TableContainer>
+        )}
       />
     );
-  }
+  };
 
   return (
     <>
@@ -116,26 +115,20 @@ const CoachDetail = (props) => {
         <div className="bx--col-lg-16">
           <Breadcrumb noTrailingSlash>
             <BreadcrumbItem>
-            <Link to="/">Home</Link>
+              <Link to="/">Home</Link>
             </BreadcrumbItem>
           </Breadcrumb>
-          <h1 className="landing-page__heading">
-            Coach List
-          </h1>
+          <h1 className="landing-page__heading">Coach List</h1>
         </div>
       </div>
       <div className="bx--row landing-page__banner">
         <div className="bx--col-lg-16">
-          <Link to='/coach/add'>Add new</Link>
-          {
-            loading
-              ? <div>Loading...</div>
-              : renderList()
-          }
+          <Link to="/coach/add">Add new</Link>
+          {loading ? <div>Loading...</div> : renderList()}
         </div>
       </div>
     </>
   );
-}
+};
 
 export default CoachDetail;

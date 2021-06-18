@@ -75,169 +75,169 @@ export const DEFAULT_TRIP = {
   employee1: {}, // driver
   employee2: {}, // assistant
   route: {},
-}
+};
 
 export const COACH_DATA_TABLE_CONFIG = [
   {
     key: 'id',
-    name: 'Id'
+    name: 'Id',
   },
   {
     key: 'coachModel',
-    name: 'Coach Model'
+    name: 'Coach Model',
   },
   {
     key: 'coachVersion',
-    name: 'Coach Version'
+    name: 'Coach Version',
   },
   {
     key: 'licensePlate',
-    name: 'License Plate'
+    name: 'License Plate',
   },
   {
     key: 'color',
-    name: 'Color'
+    name: 'Color',
   },
   {
     key: 'manufacturerName',
-    name: 'Manufacturer Name'
+    name: 'Manufacturer Name',
   },
   {
     key: 'numberOfSeats',
-    name: 'Number Of Seats'
+    name: 'Number Of Seats',
   },
   {
     key: 'usedYears',
-    name: 'Used Years'
+    name: 'Used Years',
   },
   {
     key: 'lastMaintainedDate',
-    name: 'Last Maintained Date'
+    name: 'Last Maintained Date',
   },
   {
     key: 'action',
-    name: 'Action'
-  }
+    name: 'Action',
+  },
 ];
 
 export const ROUTE_DATA_TABLE_CONFIG = [
   {
     key: 'id',
-    name: 'Id'
+    name: 'Id',
   },
   {
     key: 'startingPoint',
-    name: 'Starting point'
+    name: 'Starting point',
   },
   {
     key: 'destinationPoint',
-    name: 'Destination Point'
+    name: 'Destination Point',
   },
   {
     key: 'distance',
-    name: 'Distance'
+    name: 'Distance',
   },
   {
     key: 'routeComplexity',
-    name: 'Route Complexity'
+    name: 'Route Complexity',
   },
   {
     key: 'estimatedHours',
-    name: 'Estimated Hours'
+    name: 'Estimated Hours',
   },
   {
     key: 'action',
-    name: 'Action'
+    name: 'Action',
   },
 ];
 
 export const EMPLOYEE_DATA_TABLE_CONFIG = [
   {
     key: 'id',
-    name: 'Id'
+    name: 'Id',
   },
   {
     key: 'employeeName',
-    name: 'Employee Name'
+    name: 'Employee Name',
   },
   {
     key: 'address',
-    name: 'Address'
+    name: 'Address',
   },
   {
     key: 'dateOfBirth',
-    name: 'Date of Birth'
+    name: 'Date of Birth',
   },
   {
     key: 'gender',
-    name: 'Gender'
+    name: 'Gender',
   },
   {
     key: 'identificationNumber',
-    name: 'Identification Number'
+    name: 'Identification Number',
   },
   {
     key: 'licenseCode',
-    name: 'License Code'
+    name: 'License Code',
   },
   {
     key: 'licenseType',
-    name: 'License Type'
+    name: 'License Type',
   },
   {
     key: 'seniority',
-    name: 'Seniority'
+    name: 'Seniority',
   },
   {
     key: 'action',
-    name: 'Action'
+    name: 'Action',
   },
 ];
-  
+
 export const TRIP_DATA_TABLE_CONFIG = [
   {
     key: 'id',
-    name: 'Id'
+    name: 'Id',
   },
   {
     key: 'arrivalTime',
-    name: 'Arrival Time'
+    name: 'Arrival Time',
   },
   {
     key: 'departureTime',
-    name: 'Departure Time'
+    name: 'Departure Time',
   },
   {
     key: 'ticketPrice',
-    name: 'Ticket Price'
+    name: 'Ticket Price',
   },
   {
     key: 'numberOfPassengers',
-    name: 'Number of Passengers'
+    name: 'Number of Passengers',
   },
   {
     key: 'status',
-    name: 'Status'
+    name: 'Status',
   },
   {
     key: 'coachModel',
-    name: 'Coach Model'
+    name: 'Coach Model',
   },
   {
     key: 'route',
-    name: 'Route'
+    name: 'Route',
   },
   {
     key: 'driverName',
-    name: 'Driver Name'
+    name: 'Driver Name',
   },
   {
     key: 'assistantName',
-    name: 'Assistant Name'
+    name: 'Assistant Name',
   },
   {
     key: 'action',
-    name: 'Action'
+    name: 'Action',
   },
 ];
 
@@ -261,7 +261,7 @@ export const COACH_STATISTIC_TABLE = [
   {
     key: 'action',
     name: 'Action',
-  }
+  },
 ];
 
 export const EMPLOYEE_SALARY_STATISTIC_TABLE = [
@@ -292,7 +292,7 @@ export const EMPLOYEE_SALARY_STATISTIC_TABLE = [
   {
     key: 'action',
     name: 'Action',
-  }
+  },
 ];
 
 export const COACH_NEXT_MAINTAINANCE_TABLE = [
@@ -311,7 +311,7 @@ export const COACH_NEXT_MAINTAINANCE_TABLE = [
   {
     key: 'action',
     name: 'Action',
-  }
+  },
 ];
 
 export const COACH_OVER_MAINTAINANCE_TABLE = [
@@ -330,5 +330,5 @@ export const COACH_OVER_MAINTAINANCE_TABLE = [
   {
     key: 'action',
     name: 'Action',
-  }
+  },
 ];

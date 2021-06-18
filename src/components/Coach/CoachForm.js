@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { useHistory } from "react-router";
+import { useHistory } from 'react-router';
 import _ from 'lodash';
 import {
   Breadcrumb,
@@ -11,17 +11,17 @@ import {
   DatePickerInput,
   Form,
   TextArea,
-  TextInput
+  TextInput,
 } from 'carbon-components-react';
 
 import coachActions from '../../actions/coach.actions';
 import commonActions from '../../actions/common.actions';
 
 const CoachForm = (props) => {
-  const coachState = useSelector(state => state.coachReducer);
+  const coachState = useSelector((state) => state.coachReducer);
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
   const coachId = props.match.params.id;
   const [errors, setErrors] = useState([]);
 
@@ -33,13 +33,14 @@ const CoachForm = (props) => {
 
   const onEditCoach = (key, value) => {
     dispatch(coachActions.editCoach(key, value));
-  }
+  };
 
   const submitCoach = () => {
-    dispatch(coachActions.submitCoach(editingCoach)).then(result => {
-      history.push('/coaches');
-    })
-      .catch(error => {
+    dispatch(coachActions.submitCoach(editingCoach))
+      .then((result) => {
+        history.push('/coaches');
+      })
+      .catch((error) => {
         if (_.get(error, 'response.data.Errors')) {
           setErrors(error.response.data.Errors);
         } else if (_.get(error, 'response.data.Cause')) {
@@ -48,14 +49,10 @@ const CoachForm = (props) => {
           alert('There was an error');
         }
       });
-  }
+  };
 
   if (loading) {
-    return (
-      <div>
-        Loading...
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   return (
@@ -67,15 +64,15 @@ const CoachForm = (props) => {
               <Link to="/coaches">Back to list</Link>
             </BreadcrumbItem>
           </Breadcrumb>
-          <h1 className="landing-page__heading">
-            Add new coach
-          </h1>
+          <h1 className="landing-page__heading">Add new coach</h1>
         </div>
       </div>
       <div className="bx--row landing-page__banner">
         <div className="bx--col-lg-16" style={{ color: 'red' }}>
           <ul>
-            {_.map(errors, (error, index) => <li key={index}>{error}</li>)}
+            {_.map(errors, (error, index) => (
+              <li key={index}>{error}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -175,12 +172,7 @@ const CoachForm = (props) => {
               </div>
             </div>
 
-            <Button
-              kind="primary"
-              tabIndex={0}
-              type="button"
-              onClick={submitCoach}
-            >
+            <Button kind="primary" tabIndex={0} type="button" onClick={submitCoach}>
               Submit
             </Button>
           </Form>
@@ -188,6 +180,6 @@ const CoachForm = (props) => {
       </div>
     </>
   );
-}
+};
 
 export default CoachForm;

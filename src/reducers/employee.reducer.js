@@ -9,23 +9,23 @@ const defaultState = {
 
 const employeeReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case constants.EMPLOYEE_LOADING: 
+    case constants.EMPLOYEE_LOADING:
       return {
         ...state,
         loading: true,
-      } 
-    case constants.EMPLOYEE_LOADED: 
+      };
+    case constants.EMPLOYEE_LOADED:
       return {
         ...state,
         employees: action.payload,
         loading: false,
       };
-    case constants.EMPLOYEE_SALARY_STATISTIC_LOADING: 
+    case constants.EMPLOYEE_SALARY_STATISTIC_LOADING:
       return {
         ...state,
         loading: true,
-      } 
-    case constants.EMPLOYEE_SALARY_STATISTIC_LOADED: 
+      };
+    case constants.EMPLOYEE_SALARY_STATISTIC_LOADED:
       return {
         ...state,
         statistic: action.payload,
@@ -36,15 +36,15 @@ const employeeReducer = (state = defaultState, action) => {
         ...state,
         editingEmployee: action.payload,
         loading: false,
-      }
+      };
     case constants.EMPLOYEE_EDITING_CHANGED:
       return {
         ...state,
         editingEmployee: action.payload,
-      }
+      };
     default:
       return state;
   }
-}
+};
 
 export default employeeReducer;

@@ -25,7 +25,7 @@ import { TRIP_DATA_TABLE_CONFIG } from '../../helpers/constants';
 import commonActions from '../../actions/common.actions';
 
 const TripList = (props) => {
-  const tripState = useSelector(state => state.tripReducer);
+  const tripState = useSelector((state) => state.tripReducer);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -36,26 +36,25 @@ const TripList = (props) => {
   const { trips, loading } = tripState;
 
   const showTripDetail = (id) => {
-    console.log('show detail' + id);
+    console.log(`show detail${id}`);
     history.push(`/trip/${id}`);
-  }
+  };
 
   const editTrip = (id) => {
-    console.log('edit' + id);
+    console.log(`edit${id}`);
     history.push(`/trip/${id}/edit`);
-  }
+  };
 
   const deleteTrip = (id) => {
-    console.log('delete' + id);
-    dispatch(tripActions.deleteTrip(id))
-      .catch(error => {
-        console.log(1111111, error)
-        alert("Error");
-      })
-  }
+    console.log(`delete${id}`);
+    dispatch(tripActions.deleteTrip(id)).catch((error) => {
+      console.log(1111111, error);
+      alert('Error');
+    });
+  };
 
   const renderList = () => {
-    const formattedTrips = _.map(trips, trip => ({
+    const formattedTrips = _.map(trips, (trip) => ({
       ...trip,
       coachModel: _.get(trip, 'coach.coachModel'),
       route: `${_.get(trip, 'route.startingPoint')} - ${_.get(trip, 'route.destinationPoint')}`,
@@ -72,22 +71,20 @@ const TripList = (props) => {
             <Table {...getTableProps()}>
               <TableHead>
                 <TableRow>
-                  {headers.map(header => (
-                    <TableHeader key={header.key}>
-                      {header.name}
-                    </TableHeader>
+                  {headers.map((header) => (
+                    <TableHeader key={header.key}>{header.name}</TableHeader>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map(row => (
+                {rows.map((row) => (
                   <TableRow key={row.id}>
-                    {row.cells.map(cell => (
-                      cell.info.header !== 'action'
-                        ? <TableCell key={cell.id}>{cell.value}</TableCell>
-                        : (
-                          <TableCell key={cell.id}>
-                            {/* <Button
+                    {row.cells.map((cell) =>
+                      cell.info.header !== 'action' ? (
+                        <TableCell key={cell.id}>{cell.value}</TableCell>
+                      ) : (
+                        <TableCell key={cell.id}>
+                          {/* <Button
                               hasIconOnly
                               renderIcon={View20}
                               tooltipAlignment="center"
@@ -96,41 +93,42 @@ const TripList = (props) => {
                               size="small"
                               onClick={() => showTripDetail(row.id)}
                             /> */}
-                            <Button
-                              hasIconOnly
-                              renderIcon={Edit20}
-                              tooltipAlignment="center"
-                              tooltipPosition="bottom"
-                              iconDescription="Edit trip"
-                              size="small"
-                              kind="secondary"
-                              onClick={() => editTrip(row.id)}
-                            />
-                            <ModalWrapper
-                              buttonTriggerClassName="bx--btn--sm bx--btn--icon-only"
-                              renderTriggerButtonIcon={Delete20}
-                              triggerButtonKind="danger"
-                              triggerButtonIconDescription="Delete trip"
-                              size="xs"
-                              primaryButtonText="Delete"
-                              modalHeading="Delete this trip?"
-                              modalLabel="Confirming"
-                              danger
-                              handleSubmit={() => deleteTrip(row.id)}
-                            >
-                              <p>Are you sure to delete this trip?</p>
-                            </ModalWrapper>
-                          </TableCell>
-                        )
-                    ))}
+                          <Button
+                            hasIconOnly
+                            renderIcon={Edit20}
+                            tooltipAlignment="center"
+                            tooltipPosition="bottom"
+                            iconDescription="Edit trip"
+                            size="small"
+                            kind="secondary"
+                            onClick={() => editTrip(row.id)}
+                          />
+                          <ModalWrapper
+                            buttonTriggerClassName="bx--btn--sm bx--btn--icon-only"
+                            renderTriggerButtonIcon={Delete20}
+                            triggerButtonKind="danger"
+                            triggerButtonIconDescription="Delete trip"
+                            size="xs"
+                            primaryButtonText="Delete"
+                            modalHeading="Delete this trip?"
+                            modalLabel="Confirming"
+                            danger
+                            handleSubmit={() => deleteTrip(row.id)}
+                          >
+                            <p>Are you sure to delete this trip?</p>
+                          </ModalWrapper>
+                        </TableCell>
+                      ),
+                    )}
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-          </TableContainer>)}
+          </TableContainer>
+        )}
       />
     );
-  }
+  };
 
   return (
     <>
@@ -141,23 +139,17 @@ const TripList = (props) => {
               <Link to="/">Home</Link>
             </BreadcrumbItem>
           </Breadcrumb>
-          <h1 className="landing-page__heading">
-            Trip List
-          </h1>
+          <h1 className="landing-page__heading">Trip List</h1>
         </div>
       </div>
       <div className="bx--row landing-page__banner">
         <div className="bx--col-lg-16">
-          <Link to='/trip/add'>Add new</Link>
-          {
-            loading
-              ? <div>Loading...</div>
-              : renderList()
-          }
+          <Link to="/trip/add">Add new</Link>
+          {loading ? <div>Loading...</div> : renderList()}
         </div>
       </div>
     </>
   );
-}
+};
 
 export default TripList;

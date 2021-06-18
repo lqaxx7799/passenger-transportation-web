@@ -30,7 +30,7 @@ const EmployeeSalaryStatistic = (props) => {
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
 
-  const employeeState = useSelector(state => state.employeeReducer);
+  const employeeState = useSelector((state) => state.employeeReducer);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -38,15 +38,14 @@ const EmployeeSalaryStatistic = (props) => {
 
   const viewStatistic = () => {
     dispatch(employeeActions.getEmployeeSalaryStatistic(year, month));
-  }
+  };
 
   const showEmployeeDetail = (id) => {
-    console.log('show detail' + id);
+    console.log(`show detail${id}`);
     history.push(`/employee/${id}`);
-  }
+  };
 
   const renderStatistic = () => {
-    
     const formattedStatistic = _.map(statistic, (item, index) => {
       return {
         id: _.get(item, 'employee.id'),
@@ -81,28 +80,27 @@ const EmployeeSalaryStatistic = (props) => {
               <Table {...getTableProps()}>
                 <TableHead>
                   <TableRow>
-                    {headers.map(header => (
-                      <TableHeader key={header.key}>
-                        {header.name}
-                      </TableHeader>
+                    {headers.map((header) => (
+                      <TableHeader key={header.key}>{header.name}</TableHeader>
                     ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map(row => (
+                  {rows.map((row) => (
                     <TableRow key={row.id}>
-                      {row.cells.map(cell => (
+                      {row.cells.map((cell) => (
                         <TableCell key={cell.id}>{cell.value}</TableCell>
                       ))}
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
-            </TableContainer>)}
+            </TableContainer>
+          )}
         />
       </div>
     );
-  }
+  };
 
   return (
     <>
@@ -113,9 +111,7 @@ const EmployeeSalaryStatistic = (props) => {
               <Link to="/">Home</Link>
             </BreadcrumbItem>
           </Breadcrumb>
-          <h1 className="landing-page__heading">
-            Employee Salary Statistic
-          </h1>
+          <h1 className="landing-page__heading">Employee Salary Statistic</h1>
         </div>
       </div>
 
@@ -140,25 +136,13 @@ const EmployeeSalaryStatistic = (props) => {
         </div>
 
         <div style={{ marginBottom: '2rem' }} className="bx--col-lg-4">
-          <Button
-            kind="primary"
-            tabIndex={0}
-            type="button"
-            onClick={viewStatistic}
-          >
+          <Button kind="primary" tabIndex={0} type="button" onClick={viewStatistic}>
             View Statistic
           </Button>
         </div>
       </div>
 
-      <div className="bx--row landing-page__banner">
-        {
-          loading
-            ? <div>Loading...</div>
-            : renderStatistic()
-        }
-      </div>
-
+      <div className="bx--row landing-page__banner">{loading ? <div>Loading...</div> : renderStatistic()}</div>
     </>
   );
 };

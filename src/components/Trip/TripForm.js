@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import _ from 'lodash';
-import { useHistory } from "react-router";
+import { useHistory } from 'react-router';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,7 +13,7 @@ import {
   Select,
   SelectItem,
   TextArea,
-  TextInput
+  TextInput,
 } from 'carbon-components-react';
 
 import tripActions from '../../actions/trip.actions';
@@ -23,14 +23,14 @@ import employeeActions from '../../actions/employee.actions';
 import commonActions from '../../actions/common.actions';
 
 const TripForm = (props) => {
-  const tripState = useSelector(state => state.tripReducer);
-  const coachState = useSelector(state => state.coachReducer);
-  const routeState = useSelector(state => state.routeReducer);
-  const employeeState = useSelector(state => state.employeeReducer);
+  const tripState = useSelector((state) => state.tripReducer);
+  const coachState = useSelector((state) => state.coachReducer);
+  const routeState = useSelector((state) => state.routeReducer);
+  const employeeState = useSelector((state) => state.employeeReducer);
 
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
   const tripId = props.match.params.id;
   const [errors, setErrors] = useState([]);
 
@@ -50,13 +50,14 @@ const TripForm = (props) => {
 
   const onEditTrip = (key, value) => {
     dispatch(tripActions.editTrip(key, value));
-  }
+  };
 
   const submitTrip = () => {
-    dispatch(tripActions.submitTrip(editingTrip)).then(result => {
-      history.push('/trips');
-    })
-      .catch(error => {
+    dispatch(tripActions.submitTrip(editingTrip))
+      .then((result) => {
+        history.push('/trips');
+      })
+      .catch((error) => {
         if (_.get(error, 'response.data.Errors')) {
           setErrors(error.response.data.Errors);
         } else if (_.get(error, 'response.data.Cause')) {
@@ -65,14 +66,10 @@ const TripForm = (props) => {
           alert('There was an error');
         }
       });
-  }
+  };
 
   if (loading) {
-    return (
-      <div>
-        Loading...
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   return (
@@ -84,15 +81,15 @@ const TripForm = (props) => {
               <Link to="/trips">Back to list</Link>
             </BreadcrumbItem>
           </Breadcrumb>
-          <h1 className="landing-page__heading">
-            Add new trip
-          </h1>
+          <h1 className="landing-page__heading">Add new trip</h1>
         </div>
       </div>
       <div className="bx--row landing-page__banner">
         <div className="bx--col-lg-16" style={{ color: 'red' }}>
           <ul>
-            {_.map(errors, (error, index) => <li key={index}>{error}</li>)}
+            {_.map(errors, (error, index) => (
+              <li key={index}>{error}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -161,17 +158,9 @@ const TripForm = (props) => {
                   value={_.get(editingTrip, 'coach.id')}
                   onChange={(e) => onEditTrip('coach', e.target.value)}
                 >
-                   <SelectItem
-                      key="0"
-                      text="- Select coach -"
-                      value=""
-                    />
+                  <SelectItem key="0" text="- Select coach -" value="" />
                   {_.map(coaches, (coach, index) => (
-                    <SelectItem
-                      key={index}
-                      text={_.get(coach, 'coachModel')}
-                      value={_.get(coach, 'id')}
-                    />
+                    <SelectItem key={index} text={_.get(coach, 'coachModel')} value={_.get(coach, 'id')} />
                   ))}
                 </Select>
               </div>
@@ -182,11 +171,7 @@ const TripForm = (props) => {
                   value={_.get(editingTrip, 'route.id')}
                   onChange={(e) => onEditTrip('route', e.target.value)}
                 >
-                  <SelectItem
-                      key="0"
-                      text="- Select route -"
-                      value=""
-                    />
+                  <SelectItem key="0" text="- Select route -" value="" />
                   {_.map(routes, (route, index) => (
                     <SelectItem
                       key={index}
@@ -202,20 +187,12 @@ const TripForm = (props) => {
                 <Select
                   invalidText="Invalid error message."
                   labelText="Driver"
-                  value={_.get(editingTrip ,'employee1.id')}
+                  value={_.get(editingTrip, 'employee1.id')}
                   onChange={(e) => onEditTrip('employee1', e.target.value)}
                 >
-                  <SelectItem
-                      key="0"
-                      text="- Select driver -"
-                      value=""
-                    />
+                  <SelectItem key="0" text="- Select driver -" value="" />
                   {_.map(employees, (employee, index) => (
-                    <SelectItem
-                      key={index}
-                      text={_.get(employee, 'employeeName')}
-                      value={_.get(employee, 'id')}
-                    />
+                    <SelectItem key={index} text={_.get(employee, 'employeeName')} value={_.get(employee, 'id')} />
                   ))}
                 </Select>
               </div>
@@ -226,28 +203,15 @@ const TripForm = (props) => {
                   value={_.get(editingTrip, 'employee2.id')}
                   onChange={(e) => onEditTrip('employee2', e.target.value)}
                 >
-                  <SelectItem
-                      key="0"
-                      text="- Select assistant -"
-                      value=""
-                    />
+                  <SelectItem key="0" text="- Select assistant -" value="" />
                   {_.map(employees, (employee, index) => (
-                    <SelectItem
-                      key={index}
-                      text={_.get(employee, 'employeeName')}
-                      value={_.get(employee, 'id')}
-                    />
+                    <SelectItem key={index} text={_.get(employee, 'employeeName')} value={_.get(employee, 'id')} />
                   ))}
                 </Select>
               </div>
             </div>
 
-            <Button
-              kind="primary"
-              tabIndex={0}
-              type="button"
-              onClick={submitTrip}
-            >
+            <Button kind="primary" tabIndex={0} type="button" onClick={submitTrip}>
               Submit
             </Button>
           </Form>
@@ -255,6 +219,6 @@ const TripForm = (props) => {
       </div>
     </>
   );
-}
+};
 
 export default TripForm;

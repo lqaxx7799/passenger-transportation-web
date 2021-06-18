@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { useHistory } from "react-router";
+import { useHistory } from 'react-router';
 import _ from 'lodash';
 import {
   Breadcrumb,
@@ -13,15 +13,15 @@ import {
   Select,
   SelectItem,
   TextArea,
-  TextInput
+  TextInput,
 } from 'carbon-components-react';
 
+import { createLogger } from 'redux-logger';
 import employeeActions from '../../actions/employee.actions';
 import commonActions from '../../actions/common.actions';
-import { createLogger } from 'redux-logger';
 
 const EmployeeForm = (props) => {
-  const employeeState = useSelector(state => state.employeeReducer);
+  const employeeState = useSelector((state) => state.employeeReducer);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -36,13 +36,14 @@ const EmployeeForm = (props) => {
 
   const onEditEmployee = (key, value) => {
     dispatch(employeeActions.editEmployee(key, value));
-  }
+  };
 
   const submitEmployee = () => {
-    dispatch(employeeActions.submitEmployee(editingEmployee)).then(result => {
-      history.push('/employees');
-    })
-      .catch(error => {
+    dispatch(employeeActions.submitEmployee(editingEmployee))
+      .then((result) => {
+        history.push('/employees');
+      })
+      .catch((error) => {
         if (_.get(error, 'response.data.Errors')) {
           setErrors(error.response.data.Errors);
         } else if (_.get(error, 'response.data.Cause')) {
@@ -51,14 +52,10 @@ const EmployeeForm = (props) => {
           alert('There was an error');
         }
       });
-  }
+  };
 
   if (loading) {
-    return (
-      <div>
-        Loading...
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   return (
@@ -70,15 +67,15 @@ const EmployeeForm = (props) => {
               <Link to="/employees">Back to list</Link>
             </BreadcrumbItem>
           </Breadcrumb>
-          <h1 className="landing-page__heading">
-            Add new employee
-          </h1>
+          <h1 className="landing-page__heading">Add new employee</h1>
         </div>
       </div>
       <div className="bx--row landing-page__banner">
         <div className="bx--col-lg-16" style={{ color: 'red' }}>
           <ul>
-            {_.map(errors, (error, index) => <li key={index}>{error}</li>)}
+            {_.map(errors, (error, index) => (
+              <li key={index}>{error}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -150,7 +147,6 @@ const EmployeeForm = (props) => {
               </div>
             </div>
 
-
             <h3>Skill</h3>
             <div className="bx--row">
               <div style={{ marginBottom: '2rem' }} className="bx--col-lg-6">
@@ -193,12 +189,7 @@ const EmployeeForm = (props) => {
               </div>
             </div>
 
-            <Button
-              kind="primary"
-              tabIndex={0}
-              type="button"
-              onClick={submitEmployee}
-            >
+            <Button kind="primary" tabIndex={0} type="button" onClick={submitEmployee}>
               Submit
             </Button>
           </Form>
@@ -206,6 +197,6 @@ const EmployeeForm = (props) => {
       </div>
     </>
   );
-}
+};
 
 export default EmployeeForm;

@@ -31,7 +31,7 @@ const CoachStatistic = (props) => {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
 
-  const coachState = useSelector(state => state.coachReducer);
+  const coachState = useSelector((state) => state.coachReducer);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -42,13 +42,13 @@ const CoachStatistic = (props) => {
   // }, [dispatch]);
 
   const viewStatistic = () => {
-    dispatch(coachActions.getCoachStatistic(from + ' 00:00:00', to + ' 00:00:00'));
-  }
+    dispatch(coachActions.getCoachStatistic(`${from} 00:00:00`, `${to} 00:00:00`));
+  };
 
   const showCoachDetail = (id) => {
-    console.log('show detail' + id);
+    console.log(`show detail${id}`);
     // history.push(`/coach/${id}`);
-  }
+  };
 
   const renderDetailModal = (id) => {
     return (
@@ -63,12 +63,10 @@ const CoachStatistic = (props) => {
         renderTriggerButtonIcon={View20}
         triggerButtonKind="primary"
       >
-        <CoachStatisticDetail 
-          data={_.find(statistic, item => _.get(item, 'coach.id') === id)}
-        />
+        <CoachStatisticDetail data={_.find(statistic, (item) => _.get(item, 'coach.id') === id)} />
       </ModalWrapper>
     );
-  }
+  };
 
   const renderStatistic = () => {
     console.log(statistic);
@@ -93,28 +91,27 @@ const CoachStatistic = (props) => {
               <Table {...getTableProps()}>
                 <TableHead>
                   <TableRow>
-                    {headers.map(header => (
-                      <TableHeader key={header.key}>
-                        {header.name}
-                      </TableHeader>
+                    {headers.map((header) => (
+                      <TableHeader key={header.key}>{header.name}</TableHeader>
                     ))}
                   </TableRow>
                 </TableHead>
                 <TableBody style={{ minHeight: '300px' }}>
-                  {rows.map(row => (
+                  {rows.map((row) => (
                     <TableRow key={row.id}>
-                      {row.cells.map(cell => (
+                      {row.cells.map((cell) => (
                         <TableCell key={cell.id}>{cell.value}</TableCell>
                       ))}
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
-            </TableContainer>)}
+            </TableContainer>
+          )}
         />
       </div>
     );
-  }
+  };
 
   return (
     <>
@@ -125,57 +122,23 @@ const CoachStatistic = (props) => {
               <Link to="/">Home</Link>
             </BreadcrumbItem>
           </Breadcrumb>
-          <h1 className="landing-page__heading">
-            Coach Revenue Statistic
-          </h1>
+          <h1 className="landing-page__heading">Coach Revenue Statistic</h1>
         </div>
       </div>
 
       <div className="bx--row" style={{ marginBottom: '20px' }}>
-        <DatePicker
-          dateFormat="Y-m-d"
-          datePickerType="single"
-          onSelect={(e) => setFrom(e.target.value)}
-        >
-          <DatePickerInput
-            id="date-picker-default-id"
-            placeholder="yyyy-mm-dd"
-            labelText="From"
-            type="text"
-            value={from}
-          />
+        <DatePicker dateFormat="Y-m-d" datePickerType="single" onSelect={(e) => setFrom(e.target.value)}>
+          <DatePickerInput id="date-picker-default-id" placeholder="yyyy-mm-dd" labelText="From" type="text" value={from} />
         </DatePicker>
-        <DatePicker
-          dateFormat="Y-m-d"
-          datePickerType="single"
-          onSelect={(e) => setTo(e.target.value)}
-        >
-          <DatePickerInput
-            id="date-picker-default-id"
-            placeholder="yyyy-mm-dd"
-            labelText="To"
-            type="text"
-            value={to}
-          />
+        <DatePicker dateFormat="Y-m-d" datePickerType="single" onSelect={(e) => setTo(e.target.value)}>
+          <DatePickerInput id="date-picker-default-id" placeholder="yyyy-mm-dd" labelText="To" type="text" value={to} />
         </DatePicker>
-        <Button
-          kind="primary"
-          tabIndex={0}
-          type="button"
-          onClick={viewStatistic}
-        >
+        <Button kind="primary" tabIndex={0} type="button" onClick={viewStatistic}>
           View Statistic
         </Button>
       </div>
 
-      <div className="bx--row landing-page__banner">
-        {
-          loading
-            ? <div>Loading...</div>
-            : renderStatistic()
-        }
-      </div>
-
+      <div className="bx--row landing-page__banner">{loading ? <div>Loading...</div> : renderStatistic()}</div>
     </>
   );
 };

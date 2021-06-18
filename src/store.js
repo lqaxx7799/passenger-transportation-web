@@ -9,10 +9,9 @@ import allReducers from './reducers';
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
     return applyMiddleware(thunk, promiseMiddleware);
-  } else {
-    // Enable additional logging in non-production environments.
-    return applyMiddleware(thunk, promiseMiddleware, createLogger())
   }
+  // Enable additional logging in non-production environments.
+  return applyMiddleware(thunk, promiseMiddleware, createLogger());
 };
 
 const composeEnhancers = composeWithDevTools({
@@ -22,5 +21,4 @@ const composeEnhancers = composeWithDevTools({
   traceLimit: 20,
 });
 
-export const store = createStore(
-  allReducers, composeEnhancers(getMiddleware()));
+export const store = createStore(allReducers, composeEnhancers(getMiddleware()));

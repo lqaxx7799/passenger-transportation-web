@@ -1,4 +1,4 @@
-import { constants, DEFAULT_ROUTE } from "../helpers/constants";
+import { constants, DEFAULT_ROUTE } from '../helpers/constants';
 import routeServices from '../services/route.services';
 
 const loadAllRoutes = () => {
@@ -6,20 +6,23 @@ const loadAllRoutes = () => {
     dispatch({
       type: constants.ROUTE_LOADING,
     });
-    return routeServices.loadAllRoutes().then(result => {
-      dispatch({
-        type: constants.ROUTE_LOADED,
-        payload: result,
+    return routeServices
+      .loadAllRoutes()
+      .then((result) => {
+        dispatch({
+          type: constants.ROUTE_LOADED,
+          payload: result,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({
+          type: constants.ROUTE_LOADED,
+          payload: [],
+        });
       });
-    }).catch(error => {
-      console.log(error);
-      dispatch({
-        type: constants.ROUTE_LOADED,
-        payload: [],
-      });
-    });
-  }
-}
+  };
+};
 
 const initEditingRoute = (id) => {
   return (dispatch) => {
@@ -32,20 +35,23 @@ const initEditingRoute = (id) => {
         payload: DEFAULT_ROUTE,
       });
     }
-    return routeServices.getRouteById(id).then(result => {
-      dispatch({
-        type: constants.ROUTE_EDITING_LOADED,
-        payload: result,
+    return routeServices
+      .getRouteById(id)
+      .then((result) => {
+        dispatch({
+          type: constants.ROUTE_EDITING_LOADED,
+          payload: result,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({
+          type: constants.ROUTE_EDITING_LOADED,
+          payload: DEFAULT_ROUTE,
+        });
       });
-    }).catch(error => {
-      console.log(error);
-      dispatch({
-        type: constants.ROUTE_EDITING_LOADED,
-        payload: DEFAULT_ROUTE,
-      });
-    });
-  }
-}
+  };
+};
 
 const editRoute = (key, value) => {
   return (dispatch, getState) => {
@@ -55,10 +61,10 @@ const editRoute = (key, value) => {
       payload: {
         ...state.routeReducer.editingRoute,
         [key]: value,
-      }
+      },
     });
-  }
-}
+  };
+};
 
 const submitRoute = (route) => {
   return (dispatch) => {
@@ -66,20 +72,20 @@ const submitRoute = (route) => {
       return routeServices.updateRoute(route);
     }
     return routeServices.addNewRoute(route);
-  }
-}
+  };
+};
 
 const deleteRoute = (id) => {
   return (dispatch, getState) => {
     const state = getState();
-    return routeServices.deleteRoute(id).then(result => {
+    return routeServices.deleteRoute(id).then((result) => {
       dispatch({
         type: constants.ROUTE_LOADED,
-        payload: state.routeReducer.routes.filter(route => route.id !== id),
+        payload: state.routeReducer.routes.filter((route) => route.id !== id),
       });
     });
-  }
-}
+  };
+};
 
 export default {
   loadAllRoutes,

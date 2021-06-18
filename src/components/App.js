@@ -36,9 +36,9 @@ import authenticationActions from '../actions/authentication.actions';
 const App = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
   useEffect(() => {
-    dispatch(authenticationActions.validate()).then(result => {
+    dispatch(authenticationActions.validate()).then((result) => {
       if (_.isEmpty(result)) {
         history.push('/login');
       }
@@ -48,35 +48,35 @@ const App = (props) => {
   return (
     <div>
       <Switch>
-        <AppRoute path='/coaches' component={CoachList} layout={MainLayout} />
-        <AppRoute path='/coach/add' component={CoachForm} layout={MainLayout} />
-        <AppRoute path='/coach/maintainance' component={CoachMaintainance} layout={MainLayout} />
-        <AppRoute path='/coach/:id/edit' component={CoachForm} layout={MainLayout} />
-        <AppRoute path='/coach/:id' component={CoachDetail} layout={MainLayout} />
+        <AppRoute path="/coaches" component={CoachList} layout={MainLayout} />
+        <AppRoute path="/coach/add" component={CoachForm} layout={MainLayout} />
+        <AppRoute path="/coach/maintainance" component={CoachMaintainance} layout={MainLayout} />
+        <AppRoute path="/coach/:id/edit" component={CoachForm} layout={MainLayout} />
+        <AppRoute path="/coach/:id" component={CoachDetail} layout={MainLayout} />
 
-        <AppRoute path='/employees' component={EmployeeList} layout={MainLayout} />
-        <AppRoute path='/employee/add' component={EmployeeForm} layout={MainLayout} />
-        <AppRoute path='/employee/:id/edit' component={EmployeeForm} layout={MainLayout} />
-        <AppRoute path='/employee/:id' component={EmployeeDetail} layout={MainLayout} />
+        <AppRoute path="/employees" component={EmployeeList} layout={MainLayout} />
+        <AppRoute path="/employee/add" component={EmployeeForm} layout={MainLayout} />
+        <AppRoute path="/employee/:id/edit" component={EmployeeForm} layout={MainLayout} />
+        <AppRoute path="/employee/:id" component={EmployeeDetail} layout={MainLayout} />
 
-        <AppRoute path='/routes' component={RouteList} layout={MainLayout} />
-        <AppRoute path='/route/add' component={RouteForm} layout={MainLayout} />
-        <AppRoute path='/route/:id/edit' component={RouteForm} layout={MainLayout} />
-        <AppRoute path='/route/:id' component={RouteDetail} layout={MainLayout} />
+        <AppRoute path="/routes" component={RouteList} layout={MainLayout} />
+        <AppRoute path="/route/add" component={RouteForm} layout={MainLayout} />
+        <AppRoute path="/route/:id/edit" component={RouteForm} layout={MainLayout} />
+        <AppRoute path="/route/:id" component={RouteDetail} layout={MainLayout} />
 
-        <AppRoute path='/trips' component={TripList} layout={MainLayout} />
-        <AppRoute path='/trip/add' component={TripForm} layout={MainLayout} />
-        <AppRoute path='/trip/:id/edit' component={TripForm} layout={MainLayout} />
-        <AppRoute path='/trip/:id' component={TripDetail} layout={MainLayout} />
+        <AppRoute path="/trips" component={TripList} layout={MainLayout} />
+        <AppRoute path="/trip/add" component={TripForm} layout={MainLayout} />
+        <AppRoute path="/trip/:id/edit" component={TripForm} layout={MainLayout} />
+        <AppRoute path="/trip/:id" component={TripDetail} layout={MainLayout} />
 
-        <AppRoute path='/statistic/coach' component={CoachStatistic} layout={MainLayout} />
-        <AppRoute path='/statistic/employee-salary' component={EmployeeSalaryStatistic} layout={MainLayout} />
+        <AppRoute path="/statistic/coach" component={CoachStatistic} layout={MainLayout} />
+        <AppRoute path="/statistic/employee-salary" component={EmployeeSalaryStatistic} layout={MainLayout} />
 
-        <AppRoute path='/login' component={LogIn} layout={MainLayout} needAuth={false} />
-        <AppRoute exact path='/' component={HomePage} layout={MainLayout} />
+        <AppRoute path="/login" component={LogIn} layout={MainLayout} needAuth={false} />
+        <AppRoute exact path="/" component={HomePage} layout={MainLayout} />
       </Switch>
     </div>
   );
-}
+};
 
 export default App;

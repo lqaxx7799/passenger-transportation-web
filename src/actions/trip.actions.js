@@ -1,4 +1,4 @@
-import { constants, DEFAULT_TRIP } from "../helpers/constants";
+import { constants, DEFAULT_TRIP } from '../helpers/constants';
 import tripServices from '../services/trip.services';
 
 const loadAllTrips = () => {
@@ -6,20 +6,23 @@ const loadAllTrips = () => {
     dispatch({
       type: constants.TRIP_LOADING,
     });
-    return tripServices.loadAllTrips().then(result => {
-      dispatch({
-        type: constants.TRIP_LOADED,
-        payload: result,
+    return tripServices
+      .loadAllTrips()
+      .then((result) => {
+        dispatch({
+          type: constants.TRIP_LOADED,
+          payload: result,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({
+          type: constants.TRIP_LOADED,
+          payload: [],
+        });
       });
-    }).catch(error => {
-      console.log(error);
-      dispatch({
-        type: constants.TRIP_LOADED,
-        payload: [],
-      });
-    });
-  }
-}
+  };
+};
 
 const initEditingTrip = (id) => {
   return (dispatch) => {
@@ -32,26 +35,29 @@ const initEditingTrip = (id) => {
         payload: DEFAULT_TRIP,
       });
     }
-    return tripServices.getTripById(id).then(result => {
-      dispatch({
-        type: constants.TRIP_EDITING_LOADED,
-        payload: {
-          ...result,
-          coach: { id: result.coach.id },
-          employee1: { id: result.employee1.id },
-          employee2: { id: result.employee2.id },
-          route: { id: result.coach.id },
-        },
+    return tripServices
+      .getTripById(id)
+      .then((result) => {
+        dispatch({
+          type: constants.TRIP_EDITING_LOADED,
+          payload: {
+            ...result,
+            coach: { id: result.coach.id },
+            employee1: { id: result.employee1.id },
+            employee2: { id: result.employee2.id },
+            route: { id: result.coach.id },
+          },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({
+          type: constants.TRIP_EDITING_LOADED,
+          payload: DEFAULT_TRIP,
+        });
       });
-    }).catch(error => {
-      console.log(error);
-      dispatch({
-        type: constants.TRIP_EDITING_LOADED,
-        payload: DEFAULT_TRIP,
-      });
-    });
-  }
-}
+  };
+};
 
 const editTrip = (key, value) => {
   return (dispatch, getState) => {
@@ -66,10 +72,10 @@ const editTrip = (key, value) => {
       payload: {
         ...state.tripReducer.editingTrip,
         [key]: value,
-      }
+      },
     });
-  }
-}
+  };
+};
 
 const submitTrip = (trip) => {
   return (dispatch) => {
@@ -78,22 +84,22 @@ const submitTrip = (trip) => {
     }
     trip = {
       ...trip,
-    }
+    };
     return tripServices.addNewTrip(trip);
-  }
-}
+  };
+};
 
 const deleteTrip = (id) => {
   return (dispatch, getState) => {
     const state = getState();
-    return tripServices.deleteTrip(id).then(result => {
+    return tripServices.deleteTrip(id).then((result) => {
       dispatch({
         type: constants.TRIP_LOADED,
-        payload: state.tripReducer.trips.filter(trip => trip.id !== id),
+        payload: state.tripReducer.trips.filter((trip) => trip.id !== id),
       });
     });
-  }
-}
+  };
+};
 
 export default {
   loadAllTrips,
